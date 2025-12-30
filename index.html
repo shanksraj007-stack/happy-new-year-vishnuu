@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>HAPPY NEW YEAR Vishnu 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
 <!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Montserrat:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
@@ -28,6 +28,7 @@ body{
   overflow:hidden;
   font-family:'Montserrat',sans-serif;
   font-size:1rem;
+  touch-action: none; /* Prevent zoom on double-tap */
 }
 
 h1, h2, h3, h4{
@@ -35,13 +36,13 @@ h1, h2, h3, h4{
   letter-spacing:1.2px;
 }
 
-h1{font-size:2.4rem}
-h2{font-size:2.1rem}
-h3{font-size:1.8rem}
+h1{font-size:2.3rem}
+h2{font-size:2.0rem}
+h3{font-size:1.7rem}
 h4{font-size:1.5rem}
 
 p{
-  font-size:1.1rem;
+  font-size:1.05rem;
   line-height:1.6;
 }
 
@@ -74,7 +75,7 @@ p{
 .card{
   width:96%;
   max-width:580px;
-  padding:32px 24px;
+  padding:28px 22px;
   background:rgba(0,0,0,.92);
   border-radius:24px;
   text-align:center;
@@ -103,6 +104,7 @@ button{
   transition:.35s ease;
   position:relative;
   overflow:hidden;
+  user-select: none;
 }
 
 button:hover{
@@ -149,7 +151,7 @@ svg{
   justify-content:center;
   font-size:3.6rem;
   cursor:pointer;
-  touch-action: none;
+  user-select: none;
 }
 .sparkle{animation:sparkle .6s infinite alternate}
 @keyframes sparkle{
@@ -167,7 +169,7 @@ svg{
 
 .primary-zone{
   position:relative;
-  height:300px;
+  height:290px;
   margin-top:30px;
 }
 
@@ -192,23 +194,24 @@ svg{
 
 .card-item{
   position:absolute;
-  width:300px;
-  height:180px;
-  border-radius:24px;
+  width:290px;
+  height:170px;
+  border-radius:22px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  font-size:1.4rem;
+  font-size:1.35rem;
   font-weight:700;
   cursor:grab;
   user-select:none;
   z-index:5;
   border:3px solid white;
   background: linear-gradient(135deg, #ff003c, #ff5fa2);
+  touch-action: none;
 }
 .card-item span{
-  font-size:3rem;
+  font-size:2.9rem;
   margin-bottom:8px
 }
 
@@ -287,10 +290,10 @@ svg{
 .popup{
   width:94%;
   max-width:760px;
-  min-height:520px;
+  min-height:500px;
   background:linear-gradient(135deg,#ff0000,#000);
   color:white;
-  padding:50px 30px;
+  padding:45px 28px;
   border-radius:18px;
   text-align:center;
   font-size:1.7rem;
@@ -330,7 +333,7 @@ svg{
   position: relative;
   width: 100%;
   max-width: 620px;
-  height: 420px;
+  height: 410px;
   margin-top: 20px;
   perspective: 1000px;
 }
@@ -397,10 +400,10 @@ svg{
 
 .wish-content {
   width: 100%;
-  max-height: 320px;
+  max-height: 310px;
   overflow-y: auto;
   padding: 18px;
-  font-size: 1.75rem;
+  font-size: 1.7rem;
   line-height: 1.55;
   text-align: center;
   scrollbar-width: thin;
@@ -425,21 +428,19 @@ svg{
   transform: rotateY(180deg);
 }
 
-/* Extra small devices (like Redmi 14C 5G) */
 @media (max-width: 414px) {
-  .page-flip-container { height: 380px; }
-  .wish-content { font-size: 1.55rem; max-height: 300px; }
-  #finalHeart { font-size: 3.6rem; }
-  h1 { font-size: 2.1rem; }
+  .page-flip-container { height: 370px; }
+  .wish-content { font-size: 1.5rem; max-height: 290px; }
+  #finalHeart { font-size: 3.5rem; }
+  h1 { font-size: 2.0rem; }
   .hold-wrap { width: 140px; height: 140px; }
   .heart { font-size: 3.2rem; }
   .card-item { width: 270px; height: 160px; font-size: 1.3rem; }
   .card-item span { font-size: 2.7rem; }
-  .primary-zone { height: 280px; }
+  .primary-zone { height: 270px; }
   .gift { width: 80px; height: 80px; font-size: 2.4rem; }
 }
 
-/* Hide YouTube player */
 #youtubePlayer {
   position: absolute;
   width: 0;
@@ -451,8 +452,6 @@ svg{
 </head>
 <body>
 <div class="bg"></div>
-
-<!-- HIDDEN YOUTUBE PLAYER -->
 <div id="youtubePlayer"></div>
 
 <!-- PAGE 0 -->
@@ -545,11 +544,10 @@ svg{
   </div>
 </div>
 
-<!-- Load YouTube IFrame API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-// ==== YOUTUBE PLAYER SETUP ====
+// ==== YOUTUBE PLAYER ====
 let player;
 let musicStarted = false;
 
@@ -578,7 +576,6 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {}
-
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.ENDED) {
     player.seekTo(0);
@@ -593,16 +590,24 @@ function startMusic() {
   player.playVideo();
 }
 
-// ==== HEART & PAGES LOGIC ====
+// ==== NAVIGATION ====
 const pages = document.querySelectorAll('.page');
 let index = 0;
 
+function next() {
+  pages[index].classList.remove("active");
+  index = Math.min(index + 1, pages.length - 1);
+  pages[index].classList.add("active");
+}
+
+// ==== HEART HOLD (WORKS ON TOUCH & MOUSE) ====
 const heart = document.getElementById("heart");
 const circle = document.getElementById("circle");
 const nextBtn = document.getElementById("nextBtn");
 let hold = 0, timer, done = false;
 
-const startHold = () => {
+function startHold(e) {
+  e.preventDefault();
   if (done) return;
   startMusic();
   timer = setInterval(() => {
@@ -616,47 +621,77 @@ const startHold = () => {
       nextBtn.style.display = "inline-block";
     }
   }, 25);
-};
-
-const stopHold = () => clearInterval(timer);
-
-heart.addEventListener('mousedown', startHold);
-heart.addEventListener('touchstart', (e) => { e.preventDefault(); startHold(); });
-document.addEventListener('mouseup', stopHold);
-document.addEventListener('touchend', stopHold);
-
-function next() {
-  pages[index].classList.remove("active");
-  index++;
-  if (index >= pages.length) index = pages.length - 1;
-  pages[index].classList.add("active");
 }
 
-// ===== DRAG CARDS =====
+function stopHold() {
+  if (timer) clearInterval(timer);
+}
+
+// Unified event listeners (mouse + touch)
+heart.addEventListener('mousedown', startHold);
+heart.addEventListener('touchstart', startHold);
+document.addEventListener('mouseup', stopHold);
+document.addEventListener('touchend', stopHold);
+document.addEventListener('touchcancel', stopHold);
+
+// ==== DRAG CARDS (MOBILE + DESKTOP) ====
 document.querySelectorAll('.card-item').forEach(card => {
-  card.onmousedown = e => {
-    let x = e.clientX - card.offsetLeft;
-    let y = e.clientY - card.offsetTop;
+  let isDragging = false;
+  let startX, startY, initialX, initialY;
+
+  function startDrag(clientX, clientY) {
+    isDragging = true;
     card.style.zIndex = 10;
     card.style.cursor = 'grabbing';
-    function move(e) {
-      card.style.left = (e.pageX - x) + 'px';
-      card.style.top = (e.pageY - y) + 'px';
-    }
-    document.addEventListener('mousemove', move);
-    document.onmouseup = () => {
-      document.removeEventListener('mousemove', move);
+    initialX = parseFloat(card.style.left || (card.offsetLeft + window.scrollX)) || 0;
+    initialY = parseFloat(card.style.top || (card.offsetTop + window.scrollY)) || 0;
+    startX = clientX;
+    startY = clientY;
+    card.classList.add('dragging');
+  }
+
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    const dx = clientX - startX;
+    const dy = clientY - startY;
+    card.style.left = (initialX + dx) + 'px';
+    card.style.top = (initialY + dy) + 'px';
+  }
+
+  function stopDrag() {
+    if (isDragging) {
+      isDragging = false;
       card.style.cursor = 'grab';
-    };
-  };
+      card.classList.remove('dragging');
+    }
+  }
+
+  // Mouse
+  card.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+  document.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', stopDrag);
+
+  // Touch
+  card.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    startDrag(touch.clientX, touch.clientY);
+  });
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      doDrag(touch.clientX, touch.clientY);
+    }
+  }, { passive: false });
+  document.addEventListener('touchend', stopDrag);
+  document.addEventListener('touchcancel', stopDrag);
 });
 
-// ===== GIFT & TICKET =====
+// ==== GIFT & TICKET ====
 const gift = document.getElementById("gift");
-const ticket = document.getElementById("ticket");
-
-gift.onclick = () => {
-  navigator.vibrate && navigator.vibrate([120, 60, 120]);
+gift.onclick = (e) => {
+  e.preventDefault();
+  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   document.body.classList.add("gold");
   for (let i = 0; i < 60; i++) {
     let p = document.createElement("div");
@@ -668,28 +703,27 @@ gift.onclick = () => {
     gift.appendChild(p);
     setTimeout(() => p.remove(), 900);
   }
-  setTimeout(() => ticket.style.display = "flex", 600);
+  setTimeout(() => document.getElementById("ticket").style.display = "flex", 600);
 };
 
-// ===== MEMORIES =====
-const revealBtn = document.getElementById("revealMemoriesBtn");
-const popupOverlay = document.getElementById("popupOverlay");
-const popupMessage = document.getElementById("popupMessage");
-
-revealBtn.onclick = () => {
-  revealBtn.style.display = "none";
-  popupOverlay.style.display = "flex";
-  
-  popupMessage.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
-  popupMessage.classList.add("show");
+// ==== MEMORIES POPUP ====
+document.getElementById("revealMemoriesBtn").onclick = (e) => {
+  e.preventDefault();
+  const btn = e.target;
+  btn.style.display = "none";
+  const overlay = document.getElementById("popupOverlay");
+  const msg = document.getElementById("popupMessage");
+  overlay.style.display = "flex";
+  msg.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
+  msg.classList.add("show");
 
   setTimeout(() => {
-    popupMessage.innerHTML += '<br><br><button id="secondPopupBtn" class="signature-font" style="font-size:2.2rem;">Something Special Than Photos 💖</button>';
-    const secondBtn = document.getElementById("secondPopupBtn");
-    secondBtn.onclick = () => {
-      popupMessage.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
-      popupMessage.style.background = "linear-gradient(135deg,#ff0000,#000)";
-      popupMessage.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
+    msg.innerHTML += '<br><br><button id="secondPopupBtn" class="signature-font" style="font-size:2.2rem;">Something Special Than Photos 💖</button>';
+    document.getElementById("secondPopupBtn").onclick = (e2) => {
+      e2.preventDefault();
+      msg.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
+      msg.style.background = "linear-gradient(135deg,#ff0000,#000)";
+      msg.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
 
       setTimeout(() => {
         const wishBtn = document.createElement('button');
@@ -698,18 +732,20 @@ revealBtn.onclick = () => {
         wishBtn.style.fontSize = '2.2rem';
         wishBtn.style.marginTop = '30px';
         wishBtn.style.padding = '18px 40px';
-        wishBtn.onclick = () => {
-          popupOverlay.style.display = 'none';
+        wishBtn.onclick = (e3) => {
+          e3.preventDefault();
+          overlay.style.display = 'none';
           pages[pages.length - 1].classList.add('active');
         };
-        popupMessage.appendChild(wishBtn);
+        msg.appendChild(wishBtn);
       }, 5000);
     };
   }, 2000);
 };
 
-// ===== FINAL WISH FLIP =====
-document.getElementById('tapTab').addEventListener('click', function() {
+// ==== FLIP CARD ====
+document.getElementById('tapTab').addEventListener('click', function(e) {
+  e.preventDefault();
   const container = document.querySelector('.page-flip-container');
   container.classList.add('page-flipped');
   this.style.pointerEvents = 'none';
