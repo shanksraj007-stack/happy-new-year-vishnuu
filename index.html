@@ -407,8 +407,11 @@ svg {
 <body>
 <div class="bg"></div>
 
-<!-- YouTube player -->
-<div id="youtubePlayer"></div>
+<!-- ✅ Audio element - YOUR SONG -->
+<audio id="healedSong" preload="metadata">
+  <source src="YOUR_MP3_URL_HERE" type="audio/mpeg">
+  Your browser does not support audio.
+</audio>
 
 <!-- PAGE 0 -->
 <div class="page active">
@@ -496,81 +499,13 @@ svg {
   <div class="popup" id="popupMessage"></div>
 </div>
 
-<!-- Load YouTube IFrame API with fallback -->
 <script>
 // ======================
 // GLOBALS
 // ======================
-let player = null;
-let hasUserInteracted = false;
 let currentPage = 0;
 const pages = document.querySelectorAll('.page');
-
-// ======================
-// Fallback: If YouTube API fails, skip audio
-// ======================
-let youtubeApiLoaded = false;
-setTimeout(() => {
-  if (!youtubeApiLoaded) {
-    console.warn("YouTube API failed to load. Proceeding without music.");
-    // Allow interaction without player
-    const heart = document.getElementById('heart');
-    heart.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      // Show visual feedback only
-      const circle = document.getElementById('circle');
-      let holdProgress = 0;
-      const interval = setInterval(() => {
-        holdProgress += 2;
-        circle.style.strokeDashoffset = 471 - (471 * holdProgress / 100);
-        if (holdProgress >= 100) {
-          clearInterval(interval);
-          heart.innerHTML = '💖';
-          heart.style.animation = 'sparkle 0.8s infinite alternate';
-          document.getElementById('nextBtn').style.display = 'inline-block';
-        }
-      }, 30);
-    });
-  }
-}, 3000);
-
-function onYouTubeIframeAPIReady() {
-  youtubeApiLoaded = true;
-  player = new YT.Player('youtubePlayer', {
-    height: '1',
-    width: '1',
-    videoId: 'zr_yFgFjpD8',
-    playerVars: {
-      autoplay: 0,
-      controls: 0,
-      showinfo: 0,
-      rel: 0,
-      modestbranding: 1,
-      loop: 1,
-      playlist: 'zr_yFgFjpD8',
-      playsinline: 1
-    },
-    events: {
-      'onReady': () => {},
-      'onStateChange': (event) => {
-        if (event.data === YT.PlayerState.ENDED) {
-          player.seekTo(0);
-        }
-      }
-    }
-  });
-}
-
-// ======================
-// Play Music ONLY on Hold (not single tap)
-// ======================
-function tryPlayMusic() {
-  if (!hasUserInteracted && player) {
-    hasUserInteracted = true;
-    player.setVolume(35);
-    player.playVideo(); // This MUST be called inside a trusted gesture
-  }
-}
+const audio = document.getElementById('healedSong');
 
 // ======================
 // NAVIGATION
@@ -583,7 +518,7 @@ function goToPage(index) {
 }
 
 // ======================
-// TAP & HOLD (HEART) - ONLY HEALS ON HOLD, MUSIC PLAYS ON HOLD
+// TAP & HOLD — HEART HEALING (NO MUSIC UNTIL COMPLETE)
 // ======================
 const heart = document.getElementById('heart');
 const circle = document.getElementById('circle');
@@ -597,9 +532,6 @@ function onHoldStart(e) {
   e.preventDefault();
   e.stopPropagation();
 
-  // ✅ PLAY MUSIC IMMEDIATELY IN TOUCH GESTURE
-  tryPlayMusic();
-
   if (holdProgress >= 100 || isHolding) return;
   isHolding = true;
 
@@ -611,6 +543,10 @@ function onHoldStart(e) {
       heart.innerHTML = '💖';
       heart.style.animation = 'sparkle 0.8s infinite alternate';
       nextBtn.style.display = 'inline-block';
+
+      // ✅ PLAY SONG ONLY AFTER HEALING IS COMPLETE
+      audio.volume = 0.45;
+      audio.play().catch(e => console.warn("Audio play failed:", e));
     }
   }, 30);
 }
@@ -620,7 +556,6 @@ function onHoldEnd() {
   isHolding = false;
 }
 
-// Attach to both mouse and touch
 heart.addEventListener('mousedown', onHoldStart);
 heart.addEventListener('touchstart', onHoldStart, { passive: false });
 document.addEventListener('mouseup', onHoldEnd);
@@ -628,7 +563,7 @@ document.addEventListener('touchend', onHoldEnd);
 document.addEventListener('touchcancel', onHoldEnd);
 
 // ======================
-// DRAG CARDS – TOUCH + MOUSE
+// DRAG CARDS – TOUCH + MOUSE (unchanged)
 // ======================
 document.querySelectorAll('.card-item').forEach(card => {
   let isDragging = false;
@@ -659,12 +594,10 @@ document.querySelectorAll('.card-item').forEach(card => {
     }
   };
 
-  // Mouse
   card.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
   document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
   document.addEventListener('mouseup', stopDrag);
 
-  // Touch
   card.addEventListener('touchstart', e => {
     e.preventDefault();
     const touch = e.touches[0];
@@ -683,11 +616,10 @@ document.querySelectorAll('.card-item').forEach(card => {
 });
 
 // ======================
-// GIFT & POPUPS
+// GIFT & POPUPS (no music here — only on heart heal)
 // ======================
 document.getElementById('gift').addEventListener('click', e => {
   e.preventDefault();
-  if (player) tryPlayMusic();
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   document.body.classList.add('gold');
   const gift = e.target;
@@ -706,7 +638,6 @@ document.getElementById('gift').addEventListener('click', e => {
 
 document.getElementById('revealMemoriesBtn').addEventListener('click', e => {
   e.preventDefault();
-  if (player) tryPlayMusic();
   e.target.style.display = 'none';
   const overlay = document.getElementById('popupOverlay');
   const msg = document.getElementById('popupMessage');
@@ -741,7 +672,6 @@ document.getElementById('revealMemoriesBtn').addEventListener('click', e => {
 
 document.getElementById('tapTab').addEventListener('click', e => {
   e.preventDefault();
-  if (player) tryPlayMusic();
   document.querySelector('.page-flip-container').classList.add('page-flipped');
   e.target.style.pointerEvents = 'none';
   e.target.style.opacity = '0.7';
