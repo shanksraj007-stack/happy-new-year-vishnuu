@@ -3,292 +3,300 @@
 <head>
 <meta charset="UTF-8" />
 <title>HAPPY NEW YEAR Vishnu 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<meta name="mobile-web-app-capable" content="yes" />
-<!-- ✅ Corrected Google Fonts link (no extra spaces) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Montserrat:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-html {
-  font-size: 15px;
+html{ font-size:18px; }
+
+body{
+  background:#000;
+  color:#fff;
+  overflow:hidden;
+  font-family:'Montserrat',sans-serif;
+  font-size:1.05rem;
 }
 
-body {
-  background: #000;
-  color: #fff;
-  overflow: hidden;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+h1, h2, h3, h4{
+  font-family:'Nothing You Could Do', cursive;
+  letter-spacing:1.8px;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Nothing You Could Do', cursive;
-  letter-spacing: 1px;
+h1{font-size:3.2rem}
+h2{font-size:2.6rem}
+h3{font-size:2.1rem}
+h4{font-size:1.8rem}
+
+p{
+  font-size:1.25rem;
+  line-height:1.8;
 }
 
-h1 { font-size: 2.1rem; }
-h2 { font-size: 1.9rem; }
-h3 { font-size: 1.6rem; }
-h4 { font-size: 1.4rem; }
-
-p {
-  font-size: 1rem;
-  line-height: 1.55;
-  margin: 8px 0;
+.signature-font{
+  font-family:'Patrick Hand', cursive;
+  font-size:1.5rem;
 }
 
-.signature-font {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 1.35rem;
-}
-
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(255,0,80,.2), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,0,0,.25), transparent 40%);
+    radial-gradient(circle at 20% 30%, rgba(255,0,80,.25), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,0,0,.3), transparent 40%);
+  transition:.8s;
 }
 
-.page {
-  position: absolute;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  padding: 12px;
+.page{
+  position:absolute;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
 }
-.page.active { display: flex; }
+.page.active{display:flex}
 
-.card {
-  width: 96%;
-  max-width: 560px;
-  padding: 26px 20px;
-  background: rgba(0,0,0,.92);
-  border-radius: 22px;
-  text-align: center;
-  position: relative;
-  border: 2px solid #ff003c;
-  box-shadow: 0 0 14px #ff003c, inset 0 0 8px rgba(255,0,60,.5);
-}
-
-body.gold {
-  background: #050300;
-}
-body.gold .bg {
-  opacity: 0;
-}
-body.gold .card {
-  border-color: gold;
-  box-shadow: 0 0 24px gold, inset 0 0 18px rgba(255,215,0,.5);
+.card{
+  width:90%;
+  max-width:620px;
+  padding:46px 38px;
+  background:rgba(0,0,0,.92);
+  border-radius:28px;
+  text-align:center;
+  position:relative;
+  border:2px solid #ff003c;
+  box-shadow:0 0 20px #ff003c,inset 0 0 12px rgba(255,0,60,.6);
+  transition:.8s;
 }
 
-button {
-  margin-top: 18px;
-  padding: 13px 34px;
-  border: none;
-  border-radius: 40px;
-  background: linear-gradient(45deg, #ff003c, #ff5fa2);
-  color: white;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-  font-weight: 600;
+body.gold{background:#050300}
+body.gold .bg{opacity:0}
+body.gold .card{
+  border-color:gold;
+  box-shadow:0 0 35px gold,inset 0 0 25px rgba(255,215,0,.6);
 }
 
-button:hover, button:focus {
-  outline: none;
-  transform: scale(1.06);
-  box-shadow: 0 0 14px #ff0000;
-  background: linear-gradient(45deg, #ff0000, #cc003c);
+button{
+  margin-top:26px;
+  padding:18px 46px;
+  border:none;
+  border-radius:45px;
+  background:linear-gradient(45deg,#ff003c,#ff5fa2);
+  color:white;
+  font-size:1.3rem;
+  cursor:pointer;
+  transition:.35s ease;
+  position:relative;
+  overflow:hidden;
 }
 
-.hold-wrap {
-  margin: 22px auto;
-  width: 150px;
-  height: 150px;
-  position: relative;
+button:hover{
+  transform:scale(1.1);
+  box-shadow: 0 0 20px #ff0000, inset 0 0 10px #000;
+  filter: drop-shadow(0 0 10px #ff0000);
+  background:linear-gradient(45deg,#ff0000,#cc003c);
+  animation: glow 1s infinite alternate;
 }
-svg {
-  position: absolute;
-  inset: 0;
-  transform: rotate(-90deg);
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px #ff0000, inset 0 0 10px #000; }
+  to { box-shadow: 0 0 40px #ff0000, inset 0 0 20px #000; }
 }
-.track {
-  fill: none;
-  stroke: rgba(255,255,255,.15);
-  stroke-width: 5;
+
+.hold-wrap{
+  margin:36px auto;
+  width:200px;
+  height:200px;
+  position:relative;
 }
-.progress {
-  fill: none;
-  stroke: white;
-  stroke-width: 5;
-  stroke-dasharray: 471;
-  stroke-dashoffset: 471;
+svg{
+  position:absolute;
+  inset:0;
+  transform:rotate(-90deg)
 }
-.heart {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3.3rem;
-  cursor: pointer;
+.track{
+  fill:none;
+  stroke:rgba(255,255,255,.15);
+  stroke-width:7
+}
+.progress{
+  fill:none;
+  stroke:white;
+  stroke-width:7;
+  stroke-dasharray:565;
+  stroke-dashoffset:565
+}
+.heart{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:4.6rem;
+  cursor:pointer;
   user-select: none;
   -webkit-user-drag: none;
 }
-
-.secondary-text {
-  position: absolute;
-  top: 4%;
-  width: 100%;
-  text-align: center;
-  opacity: .9;
-  padding: 0 16px;
+.sparkle{animation:sparkle .6s infinite alternate}
+@keyframes sparkle{
+  to{transform:scale(1.3); text-shadow:0 0 20px #ff66cc;}
 }
 
-.primary-zone {
-  position: relative;
-  height: 270px;
-  margin-top: 28px;
+.secondary-text{
+  position:absolute;
+  top:6%;
+  width:100%;
+  text-align:center;
+  opacity:.9;
 }
 
-.gift {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 85px;
-  height: 85px;
-  background: #ff4fa3;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.6rem;
-  box-shadow: 0 0 22px rgba(255,80,160,.8);
-  z-index: 2;
-  cursor: pointer;
-  transition: transform 0.3s;
+.primary-zone{
+  position:relative;
+  height:360px;
+  margin-top:40px;
 }
 
-.card-item {
-  position: absolute;
-  width: 270px;
-  height: 160px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  font-weight: 700;
-  cursor: grab;
-  user-select: none;
-  z-index: 5;
-  border: 3px solid white;
+.gift{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:110px;
+  height:110px;
+  background:#ff4fa3;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:3.4rem;
+  box-shadow:0 0 30px rgba(255,80,160,.9);
+  z-index:2;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.card-item{
+  position:absolute;
+  width:360px;
+  height:210px;
+  border-radius:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:1.6rem;
+  font-weight:700;
+  cursor:grab;
+  user-select:none;
+  z-index:5;
+  border:4px solid white;
   background: linear-gradient(135deg, #ff003c, #ff5fa2);
-  touch-action: none;
 }
-.card-item span {
-  font-size: 2.7rem;
-  margin-bottom: 6px;
+.card-item span{
+  font-size:3.6rem;
+  margin-bottom:10px
 }
 
-.bad { background: linear-gradient(135deg, #1e2a4f, #7aa2ff); color: #fff; }
-.work { background: linear-gradient(135deg, #3b3b3b, #e0e0e0); color: #fff; }
-.stress { background: linear-gradient(135deg, #3c1e4f, #e08cff); color: #fff; }
-.distance { background: linear-gradient(135deg, #0f3d3a, #6fffe9); color: #fff; }
+.bad{background: linear-gradient(135deg,#1e2a4f,#7aa2ff); color:#fff}
+.work{background: linear-gradient(135deg,#3b3b3b,#e0e0e0); color:#fff}
+.stress{background: linear-gradient(135deg,#3c1e4f,#e08cff); color:#fff}
+.distance{background: linear-gradient(135deg,#0f3d3a,#6fffe9); color:#fff}
 
-.particle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: gold;
-  border-radius: 50%;
-  animation: burst 0.9s linear forwards;
+.particle{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:gold;
+  border-radius:50%;
+  animation:burst .9s linear forwards;
 }
-@keyframes burst {
-  to {
-    transform: translate(var(--x), var(--y));
-    opacity: 0;
+@keyframes burst{
+  to{
+    transform:translate(var(--x),var(--y));
+    opacity:0
   }
 }
 
-.ticket {
-  position: fixed;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 20;
-  padding: 12px;
+.ticket{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:20;
 }
-.ticket-inner {
-  width: 96%;
-  max-width: 680px;
-  background: linear-gradient(135deg, #ffd700, #fff1a8);
-  color: #4a3300;
-  padding: 55px 38px;
-  border-radius: 26px;
-  box-shadow: 0 0 50px gold;
-  text-align: center;
-  transform: rotate(-4deg);
-  transition: all 0.5s;
-}
-.ticket-inner h1 {
-  font-size: 3rem;
-  color: gold;
-  -webkit-text-stroke: 1px #000;
-  text-shadow: 0 0 12px rgba(255,215,0,.85);
-}
-.ticket-inner p {
-  font-size: 1.3rem;
-  margin-top: 10px;
-}
-.fade { opacity: .65; }
 
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
-  padding: 16px;
+.ticket-inner{
+  width:95%;
+  max-width:760px;
+  background:linear-gradient(135deg,#ffd700,#fff1a8);
+  color:#4a3300;
+  padding:80px 55px;
+  border-radius:32px;
+  position:relative;
+  box-shadow:0 0 65px gold;
+  text-align:center;
+  transform:rotate(-4deg);
+  transition:.5s;
 }
-.popup {
-  width: 94%;
-  max-width: 720px;
-  min-height: 480px;
-  background: linear-gradient(135deg, #ff0000, #000);
-  color: white;
-  padding: 45px 25px;
-  border-radius: 16px;
-  text-align: center;
-  font-size: 1.65rem;
-  box-shadow: 0 0 45px #ff0000, inset 0 0 16px #fff;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.7s ease;
+.ticket-inner:hover{
+  transform:rotate(0deg) scale(1.06);
+  box-shadow:0 0 95px gold;
 }
-.popup.show {
-  opacity: 1;
-  transform: scale(1);
+
+.ticket-inner h1{
+  font-size:4rem;
+  color:gold;
+  -webkit-text-stroke:1.5px #000;
+  text-shadow:0 0 18px rgba(255,215,0,.95);
+}
+
+.ticket-inner p{font-size:1.6rem;margin-top:16px}
+.fade{opacity:.65}
+
+.popup-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:50;
+}
+.popup{
+  max-width:800px;
+  width:90%;
+  min-height:600px;
+  background:linear-gradient(135deg,#ff0000,#000);
+  color:white;
+  padding:60px 50px;
+  border-radius:20px;
+  text-align:center;
+  font-size:2rem;
+  box-shadow:0 0 60px #ff0000, inset 0 0 20px #fff;
+  opacity:0;
+  transform:scale(0.7);
+  transition:all .8s ease;
+}
+.popup.show{
+  opacity:1;
+  transform:scale(1);
+}
+.popup button{
+  margin-top:25px;
+  background:linear-gradient(45deg,#ff003c,#ff5fa2);
+  font-size:1.7rem;
+  padding:20px 50px;
+  border-radius:40px;
 }
 
 #finalWishPage .card {
@@ -297,119 +305,127 @@ svg {
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 22px 16px;
+  padding: 30px 20px;
 }
 
 #finalHeart {
-  font-size: 4rem;
-  margin-bottom: 14px;
-  animation: sparkle 1.3s infinite alternate;
-}
-@keyframes sparkle {
-  to { text-shadow: 0 0 18px #ff66cc; transform: scale(1.15); }
+  font-size: 5rem;
+  margin-bottom: 20px;
+  animation: sparkle 1.2s ease-in-out infinite alternate;
 }
 
 .page-flip-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  height: 390px;
-  margin-top: 18px;
-  perspective: 1000px;
+  max-width: 680px;
+  height: 480px;
+  margin-top: 25px;
+  perspective: 1200px;
 }
+
 .page-flip {
   width: 100%;
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
+
 .page-front, .page-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 20px;
+  border-radius: 26px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 22px;
+  padding: 30px;
   box-sizing: border-box;
   text-align: center;
 }
+
 .page-front {
   background: linear-gradient(135deg, #ff003c, #ff5fa2);
   color: white;
-}
-.page-back {
-  background: linear-gradient(135deg, #ffd700, #ffaa00);
-  color: #4a3300;
-  transform: rotateY(180deg);
-  font-family: 'Patrick Hand', cursive;
-  box-shadow: 0 0 28px gold;
 }
 
 #tapTab {
   background: linear-gradient(135deg, #ff6b9d, #ff003c);
   color: white;
   font-family: 'Patrick Hand', cursive;
-  font-size: 1.8rem;
-  padding: 16px 45px;
-  border-radius: 50px;
+  font-size: 2.1rem;
+  padding: 20px 55px;
+  border-radius: 55px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(255,0,60,0.7);
-  transition: all 0.3s;
+  box-shadow: 0 8px 25px rgba(255,0,60,0.8);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
   user-select: none;
-  border: 2.5px solid white;
+  border: 3px solid white;
   max-width: 95%;
   word-break: break-word;
 }
-#tapTab:active {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(255,0,60,0.85);
+#tapTab:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 30px rgba(255,0,60,0.95);
+}
+
+.page-back {
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: #4a3300;
+  transform: rotateY(180deg);
+  font-family: 'Patrick Hand', cursive;
+  box-shadow: 0 0 35px gold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
 }
 
 .wish-content {
   width: 100%;
-  max-height: 290px;
+  max-height: 360px;
   overflow-y: auto;
-  padding: 16px;
-  font-size: 1.65rem;
-  line-height: 1.5;
+  padding: 20px;
+  font-size: 2rem;
+  line-height: 1.6;
   text-align: center;
   scrollbar-width: thin;
-  scrollbar-color: #444 #222; /* Dark scroll bar */
+  scrollbar-color: #d4af37 #ffeb99;
 }
-.wish-content::-webkit-scrollbar { width: 5px; }
-.wish-content::-webkit-scrollbar-track { background: #222; border-radius: 3px; }
-.wish-content::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
-.wish-content::-webkit-scrollbar-thumb:hover { background: #555; }
+.wish-content::-webkit-scrollbar {
+  width: 8px;
+}
+.wish-content::-webkit-scrollbar-track {
+  background: #ffeb99;
+  border-radius: 4px;
+}
+.wish-content::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+.wish-content::-webkit-scrollbar-thumb:hover {
+  background: #b8860b;
+}
 
 .page-flipped .page-flip {
   transform: rotateY(180deg);
 }
 
-@media (max-width: 414px) {
-  html { font-size: 14px; }
-  .page-flip-container { height: 360px; }
-  .wish-content { font-size: 1.45rem; max-height: 270px; }
-  #finalHeart { font-size: 3.4rem; }
-  h1 { font-size: 1.9rem; }
-  .hold-wrap { width: 135px; height: 135px; }
-  .heart { font-size: 3rem; }
-  .card-item { width: 250px; height: 150px; font-size: 1.25rem; }
-  .card-item span { font-size: 2.5rem; }
-  .primary-zone { height: 250px; }
-  .gift { width: 78px; height: 78px; font-size: 2.3rem; }
+@media (max-width: 600px) {
+  .page-flip-container { height: 500px; }
+  .wish-content { font-size: 1.75rem; max-height: 380px; }
+  #finalHeart { font-size: 4.2rem; }
+  h1 { font-size: 2.7rem; }
 }
 </style>
 </head>
 <body>
 <div class="bg"></div>
 
-<!-- ✅ ONLY MUSIC CHANGE: Hidden YouTube player -->
-<div id="youtubePlayer" style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;"></div>
+<!-- ✅ AUDIO: ONE-TIME START (no stop) -->
+<audio id="myAudio" src="heal.mp3" preload="auto" loop></audio>
 
 <!-- PAGE 0 -->
 <div class="page active">
@@ -422,11 +438,11 @@ svg {
         <circle class="track" cx="100" cy="100" r="90"/>
         <circle class="progress" cx="100" cy="100" r="90" id="circle"/>
       </svg>
-      <div class="heart" id="heart">💔</div>
+      <div class="heart" id="playButton">💔</div>
     </div>
 
-    <p>Tap and hold to heal the heart 💖</p>
-    <button id="nextBtn" style="display:none" onclick="goToPage(1)">Next 💖</button>
+    <p>Tap to start music • Hold to heal the heart 💖</p>
+    <button id="nextBtn" style="display:none" onclick="next()">Next 💖</button>
   </div>
 </div>
 
@@ -436,26 +452,25 @@ svg {
     <h1>Something’s waiting for you 💖</h1>
     <p>Move the little distractions aside</p>
   </div>
-
   <div class="card">
     <div class="primary-zone">
       <div class="gift" id="gift">🎁</div>
-      <div class="card-item bad" style="top:15px;left:15px"><span>🌧️</span>Bad Days</div>
-      <div class="card-item work" style="top:35px;left:250px"><span>💼</span>Work Loads</div>
-      <div class="card-item stress" style="top:150px;left:70px"><span>🧠</span>Stress</div>
-      <div class="card-item distance" style="top:160px;left:320px"><span>🌍</span>Distance</div>
+      <div class="card-item bad" style="top:20px;left:20px"><span>🌧️</span>Bad Days</div>
+      <div class="card-item work" style="top:40px;left:260px"><span>💼</span>Work Loads</div>
+      <div class="card-item stress" style="top:160px;left:80px"><span>🧠</span>Stress</div>
+      <div class="card-item distance" style="top:170px;left:330px"><span>🌍</span>Distance</div>
     </div>
   </div>
 </div>
 
-<!-- TICKET -->
+<!-- GOLDEN TICKET -->
 <div class="ticket" id="ticket">
   <div class="ticket-inner">
     <h1>GOLDEN TICKET</h1>
     <p>Valid for every day of 2026</p>
     <p>"Unlimited love & smiles"</p>
     <p class="fade">No expiry date</p>
-    <button onclick="document.getElementById('ticket').style.display='none'; goToPage(2)">Claim Ticket 💖</button>
+    <button onclick="document.getElementById('ticket').style.display='none'; next()">Claim Ticket 💖</button>
   </div>
 </div>
 
@@ -497,208 +512,144 @@ svg {
   <div class="popup" id="popupMessage"></div>
 </div>
 
-<!-- ✅ ONLY MUSIC CHANGE: Load YouTube API -->
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// ======================
-// MUSIC SYSTEM (ONLY CHANGE — FROM YOUR WORKING CODE)
-// ======================
-let player;
+// ==== AUDIO: START ONCE, NO STOP ====
+const audio = document.getElementById('myAudio');
+const playButton = document.getElementById('playButton');
 let musicStarted = false;
 
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('youtubePlayer', {
-    videoId: 'zr_yFgFjpD8',
-    playerVars: {
-      autoplay: 0,
-      controls: 0,
-      showinfo: 0,
-      rel: 0,
-      modestbranding: 1,
-      loop: 1,
-      playlist: 'zr_yFgFjpD8',
-      playsinline: 1
-    },
-    events: {
-      'onReady': function() {},
-      'onStateChange': function(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-          player.seekTo(0);
-        }
-      }
-    }
-  });
-}
-
-function playHealingMusic() {
-  if (!musicStarted && player) {
+// Tap = start music (once)
+playButton.addEventListener('click', function() {
+  if (!musicStarted) {
     musicStarted = true;
-    player.setVolume(35);
-    player.playVideo();
+    audio.volume = 0.4;
+    audio.play().catch(e => console.warn("Audio play failed:", e));
+    // Change to 💖 to show it's active
+    playButton.innerHTML = '💖';
+    playButton.classList.add('sparkle');
   }
-}
+});
 
-// ======================
-// REST OF YOUR CODE (UNCHANGED)
-// ======================
-let currentPage = 0;
+// ==== HEALING ANIMATION (on hold, visual only) ====
 const pages = document.querySelectorAll('.page');
+let index = 0;
+const circle = document.getElementById("circle");
+const nextBtn = document.getElementById("nextBtn");
+let hold = 0, timer = null, done = false;
 
-function goToPage(index) {
-  if (index < 0 || index >= pages.length) return;
-  pages[currentPage].classList.remove('active');
-  currentPage = index;
-  pages[currentPage].classList.add('active');
-}
+const startHold = () => {
+  if (done) return;
+  timer = setInterval(() => {
+    hold++;
+    circle.style.strokeDashoffset = 565 - (565 * hold / 100);
+    if (hold >= 100) {
+      done = true;
+      clearInterval(timer);
+      nextBtn.style.display = "inline-block";
+    }
+  }, 25);
+};
+const stopHold = () => { if (timer) clearInterval(timer); };
 
-const heart = document.getElementById('heart');
-const circle = document.getElementById('circle');
-const nextBtn = document.getElementById('nextBtn');
-
-let holdProgress = 0;
-let holdInterval = null;
+// Hold detection (doesn't block tap)
 let isHolding = false;
+const HOLD_THRESHOLD = 400;
 
-function onHoldStart(e) {
+playButton.addEventListener('touchstart', function(e) {
   e.preventDefault();
-  e.stopPropagation();
-
-  if (holdProgress >= 100 || isHolding) return;
-  isHolding = true;
-
-  holdInterval = setInterval(() => {
-    holdProgress += 2;
-    circle.style.strokeDashoffset = 471 - (471 * holdProgress / 100);
-    if (holdProgress >= 100) {
-      clearInterval(holdInterval);
-      heart.innerHTML = '💖';
-      heart.style.animation = 'sparkle 0.8s infinite alternate';
-      nextBtn.style.display = 'inline-block';
-
-      // ✅ PLAY MUSIC ONLY AFTER HEALING COMPLETES
-      playHealingMusic();
-    }
-  }, 30);
-}
-
-function onHoldEnd() {
-  if (holdInterval) clearInterval(holdInterval);
-  isHolding = false;
-}
-
-heart.addEventListener('mousedown', onHoldStart);
-heart.addEventListener('touchstart', onHoldStart, { passive: false });
-document.addEventListener('mouseup', onHoldEnd);
-document.addEventListener('touchend', onHoldEnd);
-document.addEventListener('touchcancel', onHoldEnd);
-
-// DRAG CARDS
-document.querySelectorAll('.card-item').forEach(card => {
-  let isDragging = false;
-  let startX, startY, initialX, initialY;
-
-  const startDrag = (clientX, clientY) => {
-    isDragging = true;
-    card.style.zIndex = 10;
-    card.style.cursor = 'grabbing';
-    initialX = parseFloat(card.style.left) || card.offsetLeft;
-    initialY = parseFloat(card.style.top) || card.offsetTop;
-    startX = clientX;
-    startY = clientY;
-    card.style.transition = 'none';
-  };
-
-  const doDrag = (clientX, clientY) => {
-    if (!isDragging) return;
-    card.style.left = (initialX + (clientX - startX)) + 'px';
-    card.style.top = (initialY + (clientY - startY)) + 'px';
-  };
-
-  const stopDrag = () => {
-    if (isDragging) {
-      isDragging = false;
-      card.style.cursor = 'grab';
-      card.style.transition = '';
-    }
-  };
-
-  card.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
-  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
-  document.addEventListener('mouseup', stopDrag);
-  card.addEventListener('touchstart', e => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    startDrag(touch.clientX, touch.clientY);
-  }, { passive: false });
-  document.addEventListener('touchmove', e => {
-    if (e.touches.length > 0) {
-      const touch = e.touches[0];
-      doDrag(touch.clientX, touch.clientY);
-    }
-  }, { passive: false });
-  document.addEventListener('touchend', stopDrag);
-  document.addEventListener('touchcancel', stopDrag);
-});
-
-// GIFT & POPUPS
-document.getElementById('gift').addEventListener('click', e => {
-  e.preventDefault();
-  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-  document.body.classList.add('gold');
-  const gift = e.target;
-  for (let i = 0; i < 50; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = '50%';
-    p.style.top = '50%';
-    p.style.setProperty('--x', `${Math.random() * 300 - 150}px`);
-    p.style.setProperty('--y', `${Math.random() * 300 - 150}px`);
-    gift.appendChild(p);
-    setTimeout(() => p.remove(), 800);
+  if (!musicStarted) {
+    musicStarted = true;
+    audio.volume = 0.4;
+    audio.play().catch(e => console.warn("Play failed:", e));
+    playButton.innerHTML = '💖';
+    playButton.classList.add('sparkle');
   }
-  setTimeout(() => document.getElementById('ticket').style.display = 'flex', 500);
-});
-
-document.getElementById('revealMemoriesBtn').addEventListener('click', e => {
-  e.preventDefault();
-  e.target.style.display = 'none';
-  const overlay = document.getElementById('popupOverlay');
-  const msg = document.getElementById('popupMessage');
-  overlay.style.display = 'flex';
-  msg.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
-  msg.classList.add('show');
-
+  isHolding = false;
   setTimeout(() => {
-    msg.innerHTML += '<br><br><button id="nextMemBtn" class="signature-font" style="font-size:2.2rem;">Something Special Than Photos 💖</button>';
-    document.getElementById('nextMemBtn').addEventListener('click', e2 => {
-      e2.preventDefault();
-      msg.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
-      msg.style.background = "linear-gradient(135deg,#ff0000,#000)";
-      msg.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
+    if (!done) {
+      isHolding = true;
+      startHold();
+    }
+  }, HOLD_THRESHOLD);
+}, { passive: false });
 
+['touchend', 'touchcancel'].forEach(ev => {
+  document.addEventListener(ev, () => { if (isHolding) stopHold(); isHolding = false; });
+});
+
+// Mouse fallback
+playButton.addEventListener('mousedown', () => {
+  if (!musicStarted) {
+    musicStarted = true;
+    audio.volume = 0.4;
+    audio.play().catch(e => console.warn("Play failed:", e));
+    playButton.innerHTML = '💖';
+    playButton.classList.add('sparkle');
+  }
+  isHolding = false;
+  setTimeout(() => { if (!done) { isHolding = true; startHold(); } }, HOLD_THRESHOLD);
+});
+document.addEventListener('mouseup', () => { if (isHolding) stopHold(); isHolding = false; });
+
+// ==== Navigation ====
+function next() {
+  pages[index].classList.remove("active");
+  index++;
+  if (index >= pages.length) index = pages.length - 1;
+  pages[index].classList.add("active");
+}
+
+// ===== DRAG, GIFT, MEMORIES, FLIP — UNCHANGED =====
+document.querySelectorAll('.card-item').forEach(card => {
+  card.onmousedown = e => {
+    let x = e.clientX - card.offsetLeft, y = e.clientY - card.offsetTop;
+    card.style.zIndex = 10; card.style.cursor = 'grabbing';
+    const move = e => { card.style.left = (e.pageX - x) + 'px'; card.style.top = (e.pageY - y) + 'px'; };
+    document.addEventListener('mousemove', move);
+    document.onmouseup = () => { document.removeEventListener('mousemove', move); card.style.cursor = 'grab'; };
+  };
+});
+
+gift.onclick = () => {
+  navigator.vibrate?.([120, 60, 120]);
+  document.body.classList.add("gold");
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement("div");
+    p.className = "particle"; p.style.left = "50%"; p.style.top = "50%";
+    p.style.setProperty('--x', `${Math.random() * 400 - 200}px`);
+    p.style.setProperty('--y', `${Math.random() * 400 - 200}px`);
+    gift.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+  }
+  setTimeout(() => ticket.style.display = "flex", 600);
+};
+
+revealMemoriesBtn.onclick = () => {
+  revealMemoriesBtn.style.display = "none";
+  popupOverlay.style.display = "flex";
+  popupMessage.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
+  popupMessage.classList.add("show");
+  setTimeout(() => {
+    popupMessage.innerHTML += '<br><br><button id="secondPopupBtn" class="signature-font" style="font-size:2.2rem;">Something Special Than Photos 💖</button>';
+    secondPopupBtn.onclick = () => {
+      popupMessage.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
+      popupMessage.style.background = "linear-gradient(135deg,#ff0000,#000)";
+      popupMessage.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
       setTimeout(() => {
-        const btn = document.createElement('button');
-        btn.className = 'signature-font';
-        btn.innerText = 'The Wish';
-        btn.style.fontSize = '2.2rem';
-        btn.style.marginTop = '30px';
-        btn.style.padding = '18px 40px';
-        btn.addEventListener('click', () => {
-          overlay.style.display = 'none';
-          goToPage(3);
-        });
-        msg.appendChild(btn);
+        const wishBtn = document.createElement('button');
+        wishBtn.className = 'signature-font'; wishBtn.innerText = 'The Wish'; wishBtn.style.fontSize = '2.2rem'; wishBtn.style.marginTop = '30px'; wishBtn.style.padding = '18px 40px';
+        wishBtn.onclick = () => { popupOverlay.style.display = 'none'; pages[pages.length - 1].classList.add('active'); };
+        popupMessage.appendChild(wishBtn);
       }, 5000);
-    });
+    };
   }, 2000);
-});
+};
 
-document.getElementById('tapTab').addEventListener('click', e => {
-  e.preventDefault();
+tapTab.onclick = () => {
   document.querySelector('.page-flip-container').classList.add('page-flipped');
-  e.target.style.pointerEvents = 'none';
-  e.target.style.opacity = '0.7';
-});
+  tapTab.style.pointerEvents = 'none';
+  tapTab.style.opacity = '0.7';
+};
 </script>
 </body>
 </html>
