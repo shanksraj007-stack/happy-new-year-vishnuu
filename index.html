@@ -378,11 +378,12 @@ svg {
   line-height: 1.5;
   text-align: center;
   scrollbar-width: thin;
-  scrollbar-color: #d4af37 #ffeb99;
+  scrollbar-color: #444 #222; /* Dark scroll bar */
 }
 .wish-content::-webkit-scrollbar { width: 5px; }
-.wish-content::-webkit-scrollbar-track { background: #ffeb99; border-radius: 3px; }
-.wish-content::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
+.wish-content::-webkit-scrollbar-track { background: #222; border-radius: 3px; }
+.wish-content::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+.wish-content::-webkit-scrollbar-thumb:hover { background: #555; }
 
 .page-flipped .page-flip {
   transform: rotateY(180deg);
@@ -405,6 +406,8 @@ svg {
 </head>
 <body>
 <div class="bg"></div>
+
+<!-- YouTube player -->
 <div id="youtubePlayer"></div>
 
 <!-- PAGE 0 -->
@@ -493,9 +496,7 @@ svg {
   <div class="popup" id="popupMessage"></div>
 </div>
 
-<!-- Load YouTube IFrame API -->
-<script src="https://www.youtube.com/iframe_api"></script>
-
+<!-- Load YouTube IFrame API with fallback -->
 <script>
 // ======================
 // GLOBALS
@@ -506,9 +507,35 @@ let currentPage = 0;
 const pages = document.querySelectorAll('.page');
 
 // ======================
-// YOUTUBE PLAYER SETUP
+// Fallback: If YouTube API fails, skip audio
 // ======================
+let youtubeApiLoaded = false;
+setTimeout(() => {
+  if (!youtubeApiLoaded) {
+    console.warn("YouTube API failed to load. Proceeding without music.");
+    // Allow interaction without player
+    const heart = document.getElementById('heart');
+    heart.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      // Show visual feedback only
+      const circle = document.getElementById('circle');
+      let holdProgress = 0;
+      const interval = setInterval(() => {
+        holdProgress += 2;
+        circle.style.strokeDashoffset = 471 - (471 * holdProgress / 100);
+        if (holdProgress >= 100) {
+          clearInterval(interval);
+          heart.innerHTML = '💖';
+          heart.style.animation = 'sparkle 0.8s infinite alternate';
+          document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+      }, 30);
+    });
+  }
+}, 3000);
+
 function onYouTubeIframeAPIReady() {
+  youtubeApiLoaded = true;
   player = new YT.Player('youtubePlayer', {
     height: '1',
     width: '1',
@@ -524,9 +551,7 @@ function onYouTubeIframeAPIReady() {
       playsinline: 1
     },
     events: {
-      'onReady': (event) => {
-        // Optional: pre-load
-      },
+      'onReady': () => {},
       'onStateChange': (event) => {
         if (event.data === YT.PlayerState.ENDED) {
           player.seekTo(0);
@@ -537,13 +562,13 @@ function onYouTubeIframeAPIReady() {
 }
 
 // ======================
-// CRITICAL: Play ONLY inside trusted gesture
+// Play Music ONLY on Hold (not single tap)
 // ======================
 function tryPlayMusic() {
   if (!hasUserInteracted && player) {
     hasUserInteracted = true;
     player.setVolume(35);
-    player.playVideo(); // ✅ Allowed because called inside touchstart/mousedown
+    player.playVideo(); // This MUST be called inside a trusted gesture
   }
 }
 
@@ -558,7 +583,7 @@ function goToPage(index) {
 }
 
 // ======================
-// TAP & HOLD (HEART) – MOBILE SAFE
+// TAP & HOLD (HEART) - ONLY HEALS ON HOLD, MUSIC PLAYS ON HOLD
 // ======================
 const heart = document.getElementById('heart');
 const circle = document.getElementById('circle');
@@ -662,7 +687,7 @@ document.querySelectorAll('.card-item').forEach(card => {
 // ======================
 document.getElementById('gift').addEventListener('click', e => {
   e.preventDefault();
-  tryPlayMusic(); // Optional: reinforce audio unlock
+  if (player) tryPlayMusic();
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   document.body.classList.add('gold');
   const gift = e.target;
@@ -681,19 +706,19 @@ document.getElementById('gift').addEventListener('click', e => {
 
 document.getElementById('revealMemoriesBtn').addEventListener('click', e => {
   e.preventDefault();
-  tryPlayMusic();
+  if (player) tryPlayMusic();
   e.target.style.display = 'none';
   const overlay = document.getElementById('popupOverlay');
   const msg = document.getElementById('popupMessage');
   overlay.style.display = 'flex';
-  msg.innerHTML = '<span class="signature-font">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
+  msg.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
   msg.classList.add('show');
 
   setTimeout(() => {
-    msg.innerHTML += '<br><br><button id="nextMemBtn" class="signature-font">Something Special Than Photos 💖</button>';
+    msg.innerHTML += '<br><br><button id="nextMemBtn" class="signature-font" style="font-size:2.2rem;">Something Special Than Photos 💖</button>';
     document.getElementById('nextMemBtn').addEventListener('click', e2 => {
       e2.preventDefault();
-      msg.innerHTML = '<span class="signature-font">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
+      msg.innerHTML = '<span class="signature-font" style="font-size:2.5rem;">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
       msg.style.background = "linear-gradient(135deg,#ff0000,#000)";
       msg.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
 
@@ -701,25 +726,25 @@ document.getElementById('revealMemoriesBtn').addEventListener('click', e => {
         const btn = document.createElement('button');
         btn.className = 'signature-font';
         btn.innerText = 'The Wish';
-        btn.style.marginTop = '25px';
-        btn.style.padding = '16px 36px';
-        btn.style.fontSize = '1.6rem';
+        btn.style.fontSize = '2.2rem';
+        btn.style.marginTop = '30px';
+        btn.style.padding = '18px 40px';
         btn.addEventListener('click', () => {
           overlay.style.display = 'none';
           goToPage(3);
         });
         msg.appendChild(btn);
-      }, 4500);
+      }, 5000);
     });
-  }, 1800);
+  }, 2000);
 });
 
 document.getElementById('tapTab').addEventListener('click', e => {
   e.preventDefault();
-  tryPlayMusic(); // Unlock if not already
+  if (player) tryPlayMusic();
   document.querySelector('.page-flip-container').classList.add('page-flipped');
   e.target.style.pointerEvents = 'none';
-  e.target.style.opacity = '0.6';
+  e.target.style.opacity = '0.7';
 });
 </script>
 </body>
