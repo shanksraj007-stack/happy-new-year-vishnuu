@@ -5,7 +5,7 @@
 <title>HAPPY NEW YEAR Vishnu 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 <meta name="mobile-web-app-capable" content="yes" />
-<!-- ✅ FIXED FONT LINK (no extra spaces) -->
+<!-- ✅ Corrected Google Fonts link (no extra spaces) -->
 <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Montserrat:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <style>
@@ -408,11 +408,8 @@ svg {
 <body>
 <div class="bg"></div>
 
-<!-- ✅ AUDIO: Local MP3 (no YouTube) -->
-<audio id="healedSong" preload="metadata" playsinline>
-  <source src="heal.mp3" type="audio/mpeg">
-  Your browser does not support audio.
-</audio>
+<!-- ✅ ONLY MUSIC CHANGE: Hidden YouTube player -->
+<div id="youtubePlayer" style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;"></div>
 
 <!-- PAGE 0 -->
 <div class="page active">
@@ -500,17 +497,53 @@ svg {
   <div class="popup" id="popupMessage"></div>
 </div>
 
+<!-- ✅ ONLY MUSIC CHANGE: Load YouTube API -->
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
 // ======================
-// GLOBALS
+// MUSIC SYSTEM (ONLY CHANGE — FROM YOUR WORKING CODE)
+// ======================
+let player;
+let musicStarted = false;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('youtubePlayer', {
+    videoId: 'zr_yFgFjpD8',
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      showinfo: 0,
+      rel: 0,
+      modestbranding: 1,
+      loop: 1,
+      playlist: 'zr_yFgFjpD8',
+      playsinline: 1
+    },
+    events: {
+      'onReady': function() {},
+      'onStateChange': function(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+          player.seekTo(0);
+        }
+      }
+    }
+  });
+}
+
+function playHealingMusic() {
+  if (!musicStarted && player) {
+    musicStarted = true;
+    player.setVolume(35);
+    player.playVideo();
+  }
+}
+
+// ======================
+// REST OF YOUR CODE (UNCHANGED)
 // ======================
 let currentPage = 0;
 const pages = document.querySelectorAll('.page');
-const audio = document.getElementById('healedSong');
 
-// ======================
-// NAVIGATION (unchanged)
-// ======================
 function goToPage(index) {
   if (index < 0 || index >= pages.length) return;
   pages[currentPage].classList.remove('active');
@@ -518,9 +551,6 @@ function goToPage(index) {
   pages[currentPage].classList.add('active');
 }
 
-// ======================
-// TAP & HOLD — HEART HEALING + AUDIO AFTER COMPLETE
-// ======================
 const heart = document.getElementById('heart');
 const circle = document.getElementById('circle');
 const nextBtn = document.getElementById('nextBtn');
@@ -545,10 +575,8 @@ function onHoldStart(e) {
       heart.style.animation = 'sparkle 0.8s infinite alternate';
       nextBtn.style.display = 'inline-block';
 
-      // ✅ PLAY SONG ONLY AFTER HEALING IS COMPLETE
-      audio.volume = 0.45;
-      audio.currentTime = 0;
-      audio.play().catch(err => console.warn("Audio play failed:", err));
+      // ✅ PLAY MUSIC ONLY AFTER HEALING COMPLETES
+      playHealingMusic();
     }
   }, 30);
 }
@@ -564,9 +592,7 @@ document.addEventListener('mouseup', onHoldEnd);
 document.addEventListener('touchend', onHoldEnd);
 document.addEventListener('touchcancel', onHoldEnd);
 
-// ======================
-// DRAG CARDS – TOUCH + MOUSE (unchanged)
-// ======================
+// DRAG CARDS
 document.querySelectorAll('.card-item').forEach(card => {
   let isDragging = false;
   let startX, startY, initialX, initialY;
@@ -596,32 +622,25 @@ document.querySelectorAll('.card-item').forEach(card => {
     }
   };
 
-  // Mouse
   card.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
   document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
   document.addEventListener('mouseup', stopDrag);
-
-  // Touch
   card.addEventListener('touchstart', e => {
     e.preventDefault();
     const touch = e.touches[0];
     startDrag(touch.clientX, touch.clientY);
   }, { passive: false });
-
   document.addEventListener('touchmove', e => {
     if (e.touches.length > 0) {
       const touch = e.touches[0];
       doDrag(touch.clientX, touch.clientY);
     }
   }, { passive: false });
-
   document.addEventListener('touchend', stopDrag);
   document.addEventListener('touchcancel', stopDrag);
 });
 
-// ======================
-// GIFT & POPUPS (no music calls — audio only on heart heal)
-// ======================
+// GIFT & POPUPS
 document.getElementById('gift').addEventListener('click', e => {
   e.preventDefault();
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
