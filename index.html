@@ -525,27 +525,28 @@ function stopHealing() {
 
 // Hold logic (400ms threshold)
 let isHolding = false;
+let holdTimer = null;
 const HOLD_THRESHOLD = 400;
 
-// ==== TOUCH HANDLING - PLAYS MUSIC ON BOTH TAP AND HOLD ====
+// ==== TOUCH HANDLING - TAP PLAYS MUSIC, HOLD PLAYS MUSIC AND HEALS ====
 playButton.addEventListener('touchstart', function(e) {
   e.preventDefault();
   e.stopPropagation();
   
-  // PLAY MUSIC IMMEDIATELY ON TOUCH START (BOTH TAP AND HOLD)
+  // PLAY MUSIC IMMEDIATELY ON TOUCH START (FOR BOTH TAP AND HOLD)
   startMusic();
   
-  // Start holding timer
+  // Start holding timer - ONLY HOLDING WILL HEAL
   isHolding = false;
   holdTimer = setTimeout(() => {
     if (!healed) {
       isHolding = true;
-      startHealing();
+      startHealing(); // Healing starts only after 400ms hold
     }
   }, HOLD_THRESHOLD);
 }, { passive: false });
 
-// Touch end - stop healing
+// Touch end - stop healing if user was holding
 playButton.addEventListener('touchend', function(e) {
   e.preventDefault();
   if (isHolding) stopHealing();
@@ -559,19 +560,19 @@ playButton.addEventListener('touchcancel', function() {
   if (holdTimer) clearTimeout(holdTimer);
 });
 
-// ==== MOUSE HANDLING (DESKTOP) - PLAYS MUSIC ON BOTH CLICK AND HOLD ====
+// ==== MOUSE HANDLING (DESKTOP) ====
 playButton.addEventListener('mousedown', function(e) {
   e.preventDefault();
   
-  // PLAY MUSIC IMMEDIATELY ON MOUSE DOWN (BOTH CLICK AND HOLD)
+  // PLAY MUSIC IMMEDIATELY ON MOUSE DOWN
   startMusic();
   
-  // Start holding timer
+  // Start holding timer - ONLY HOLDING WILL HEAL
   isHolding = false;
   holdTimer = setTimeout(() => {
     if (!healed) {
       isHolding = true;
-      startHealing();
+      startHealing(); // Healing starts only after 400ms hold
     }
   }, HOLD_THRESHOLD);
 });
@@ -588,10 +589,10 @@ playButton.addEventListener('mouseleave', function() {
   if (holdTimer) clearTimeout(holdTimer);
 });
 
-// ==== CLICK HANDLER (AS BACKUP) ====
+// ==== CLICK HANDLER (JUST PLAYS MUSIC, NO HEALING) ====
 playButton.addEventListener('click', function(e) {
   e.preventDefault();
-  startMusic(); // Additional play attempt on click
+  startMusic(); // Only plays music on click
 });
 
 // ==== DRAG CARDS — FULL TOUCH SUPPORT ====
@@ -706,6 +707,3 @@ tapTab.addEventListener('click', () => {
 </script>
 </body>
 </html>
-
-
-
