@@ -168,7 +168,6 @@ svg{
   z-index:5;
   border:3px solid white;
   background:linear-gradient(135deg,#ff003c,#ff5fa2);
-  /* ✅ Allow dragging on mobile */
   touch-action: none;
 }
 .card-item span{
@@ -357,7 +356,7 @@ svg{
       </svg>
       <div class="heart" id="playButton">💔</div>
     </div>
-    <p>Tap to start music • Hold to heal 💖</p>
+    <p>Tap the heart to start music 💖</p>
     <button id="nextBtn" style="display:none" onclick="next()">Next 💖</button>
   </div>
 </div>
@@ -371,7 +370,6 @@ svg{
   <div class="card">
     <div class="primary-zone">
       <div class="gift" id="gift">🎁</div>
-      <!-- ✅ Cards with exact positions -->
       <div class="card-item bad" style="top:10px;left:10px"><span>🌧️</span>Bad Days</div>
       <div class="card-item work" style="top:30px;left:220px"><span>💼</span>Work Loads</div>
       <div class="card-item stress" style="top:130px;left:50px"><span>🧠</span>Stress</div>
@@ -430,7 +428,7 @@ svg{
 </div>
 
 <script>
-// ==== MUSIC: PLAY ON HEART TAP ====
+// ==== PLAY MUSIC ON HEART TAP (ONCE) ====
 const audio = document.getElementById('myAudio');
 const playButton = document.getElementById('playButton');
 let musicStarted = false;
@@ -439,57 +437,23 @@ function startMusic() {
   if (!musicStarted) {
     musicStarted = true;
     audio.volume = 0.4;
+    // This will work on mobile because it's inside a direct user gesture
     audio.play().catch(e => console.warn("Audio play failed:", e));
     playButton.innerHTML = '💖';
     playButton.classList.add('sparkle');
+    // Show next button immediately
+    document.getElementById('nextBtn').style.display = 'inline-block';
   }
 }
 
-// ✅ Works on mobile tap
+// ✅ Unified tap handler for all devices
 playButton.addEventListener('click', startMusic);
 playButton.addEventListener('touchstart', function(e) {
   e.preventDefault();
   startMusic();
 }, { passive: false });
 
-// ==== HEALING ON HOLD (optional) ====
-const circle = document.getElementById('circle');
-const nextBtn = document.getElementById('nextBtn');
-let hold = 0, timer = null, done = false;
-
-const startHold = () => {
-  if (done) return;
-  timer = setInterval(() => {
-    hold++;
-    circle.style.strokeDashoffset = 440 - (440 * hold / 100);
-    if (hold >= 100) {
-      done = true;
-      clearInterval(timer);
-      nextBtn.style.display = 'inline-block';
-    }
-  }, 25);
-};
-
-let isHolding = false;
-const HOLD_THRESHOLD = 400;
-
-playButton.addEventListener('touchstart', function(e) {
-  e.preventDefault();
-  startMusic();
-  isHolding = false;
-  setTimeout(() => {
-    if (!done) {
-      isHolding = true;
-      startHold();
-    }
-  }, HOLD_THRESHOLD);
-}, { passive: false });
-
-['touchend', 'touchcancel'].forEach(ev => {
-  document.addEventListener(ev, () => { if (isHolding) clearInterval(timer); isHolding = false; });
-});
-
-// ==== ✅ DRAG CARDS — FULL TOUCH SUPPORT ====
+// ==== DRAG CARDS — FULL TOUCH SUPPORT ====
 document.querySelectorAll('.card-item').forEach(card => {
   let isDragging = false;
   let startX, startY, initialX, initialY;
@@ -519,7 +483,7 @@ document.querySelectorAll('.card-item').forEach(card => {
     }
   };
 
-  // ✅ TOUCH EVENTS FOR MOBILE
+  // TOUCH EVENTS FOR MOBILE
   card.addEventListener('touchstart', (e) => {
     e.preventDefault();
     const touch = e.touches[0];
@@ -536,13 +500,13 @@ document.querySelectorAll('.card-item').forEach(card => {
   document.addEventListener('touchend', stopDrag);
   document.addEventListener('touchcancel', stopDrag);
 
-  // Mouse fallback (for testing)
+  // Mouse support (for desktop testing)
   card.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
   document.addEventListener('mousemove', (e) => moveDrag(e.clientX, e.clientY));
   document.addEventListener('mouseup', stopDrag);
 });
 
-// ==== Navigation & Other Interactions ====
+// ==== NAVIGATION ====
 const pages = document.querySelectorAll('.page');
 let index = 0;
 
@@ -552,7 +516,7 @@ function next() {
   pages[index].classList.add('active');
 }
 
-// Gift
+// ==== OTHER INTERACTIONS (UNCHANGED) ====
 gift.addEventListener('click', () => {
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   document.body.classList.add('gold');
@@ -569,7 +533,6 @@ gift.addEventListener('click', () => {
   setTimeout(() => ticket.style.display = 'flex', 500);
 });
 
-// Memories
 revealMemoriesBtn.addEventListener('click', () => {
   revealMemoriesBtn.style.display = 'none';
   popupOverlay.style.display = 'flex';
@@ -580,7 +543,6 @@ revealMemoriesBtn.addEventListener('click', () => {
     secondPopupBtn.onclick = () => {
       popupMessage.innerHTML = '<span class="signature-font">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
       popupMessage.style.background = "linear-gradient(135deg,#ff0000,#000)";
-      popupMessage.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
       setTimeout(() => {
         const btn = document.createElement('button');
         btn.className = 'signature-font';
@@ -598,7 +560,6 @@ revealMemoriesBtn.addEventListener('click', () => {
   }, 2000);
 });
 
-// Flip
 tapTab.addEventListener('click', () => {
   document.querySelector('.page-flip-container').classList.add('page-flipped');
   tapTab.style.pointerEvents = 'none';
