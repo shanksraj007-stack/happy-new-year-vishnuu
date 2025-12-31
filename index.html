@@ -3,65 +3,45 @@
 <head>
 <meta charset="UTF-8" />
 <title>Happy New Year Vishnu 💖</title>
-<!-- ✅ Mobile-optimized viewport -->
+<!-- ✅ Perfect mobile viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="mobile-web-app-capable" content="yes" />
-
-<!-- GOOGLE FONTS (fixed spacing) -->
 <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Montserrat:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-/* ✅ Dynamic font scaling for mobile */
-html {
-  font-size: calc(14px + 0.5vw);
-  max-font-size: 18px;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:14px}
+@media (min-width:480px){html{font-size:15px}}
+@media (min-width:768px){html{font-size:16px}}
 
 body{
   background:#000;
   color:#fff;
   overflow:hidden;
   font-family:'Montserrat',sans-serif;
-  font-size:1.05rem;
-  touch-action: manipulation;
+  font-size:1rem;
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-h1, h2, h3, h4{
-  font-family:'Nothing You Could Do', cursive;
-  letter-spacing:1.5px;
-  margin: 8px 0;
+h1,h2,h3,h4{
+  font-family:'Nothing You Could Do',cursive;
+  letter-spacing:1.2px;
+  margin:6px 0;
 }
+h1{font-size:1.9rem}
+h2{font-size:1.7rem}
+h3{font-size:1.5rem}
+h4{font-size:1.4rem}
 
-h1{font-size:2.6rem}
-h2{font-size:2.2rem}
-h3{font-size:1.9rem}
-h4{font-size:1.7rem}
-
-p{
-  font-size:1.15rem;
-  line-height:1.7;
-  margin: 10px 0;
-}
-
-.signature-font{
-  font-family:'Patrick Hand', cursive;
-  font-size:1.4rem;
-}
+p{font-size:1rem;line-height:1.6;margin:8px 0}
+.signature-font{font-family:'Patrick Hand',cursive;font-size:1.3rem}
 
 .bg{
   position:fixed;
   inset:0;
   z-index:0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,0,80,.2), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,0,0,.25), transparent 40%);
+  background:radial-gradient(circle at 20% 30%,rgba(255,0,80,.2),transparent 40%),radial-gradient(circle at 80% 70%,rgba(255,0,0,.25),transparent 40%);
 }
 
 .page{
@@ -71,54 +51,47 @@ p{
   justify-content:center;
   align-items:center;
   z-index:2;
-  padding: 12px;
+  padding:10px;
 }
 .page.active{display:flex}
 
 .card{
-  width:94%;
-  max-width:580px;
-  padding:32px 24px;
+  width:96%;
+  max-width:560px;
+  padding:24px 20px;
   background:rgba(0,0,0,.92);
-  border-radius:24px;
+  border-radius:20px;
   text-align:center;
   position:relative;
   border:2px solid #ff003c;
-  box-shadow:0 0 16px #ff003c,inset 0 0 10px rgba(255,0,60,.5);
+  box-shadow:0 0 12px #ff003c,inset 0 0 8px rgba(255,0,60,.5);
 }
 
 body.gold{background:#050300}
 body.gold .bg{opacity:0}
 body.gold .card{
   border-color:gold;
-  box-shadow:0 0 30px gold,inset 0 0 20px rgba(255,215,0,.5);
+  box-shadow:0 0 24px gold,inset 0 0 18px rgba(255,215,0,.5);
 }
 
 button{
-  margin-top:20px;
-  padding:14px 36px;
+  margin-top:16px;
+  padding:12px 30px;
   border:none;
   border-radius:40px;
   background:linear-gradient(45deg,#ff003c,#ff5fa2);
   color:white;
-  font-size:1.25rem;
+  font-size:1.1rem;
   cursor:pointer;
-  transition:.3s ease;
-  position:relative;
-  overflow:hidden;
-  font-weight: 600;
+  transition:.3s;
+  font-weight:600;
 }
-
-button:hover{
-  transform:scale(1.05);
-  box-shadow: 0 0 16px #ff0000;
-  background:linear-gradient(45deg,#ff0000,#cc003c);
-}
+button:hover{transform:scale(1.05);box-shadow:0 0 12px #ff0000}
 
 .hold-wrap{
-  margin:30px auto;
-  width:180px;
-  height:180px;
+  margin:20px auto;
+  width:140px;
+  height:140px;
   position:relative;
 }
 svg{
@@ -129,14 +102,14 @@ svg{
 .track{
   fill:none;
   stroke:rgba(255,255,255,.15);
-  stroke-width:6
+  stroke-width:5
 }
 .progress{
   fill:none;
   stroke:white;
-  stroke-width:6;
-  stroke-dasharray:534;
-  stroke-dashoffset:534
+  stroke-width:5;
+  stroke-dasharray:440;
+  stroke-dashoffset:440
 }
 .heart{
   position:absolute;
@@ -144,20 +117,17 @@ svg{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:4.2rem;
+  font-size:3.2rem;
   cursor:pointer;
-  user-select: none;
-  -webkit-user-drag: none;
-  touch-action: manipulation;
+  user-select:none;
+  -webkit-user-drag:none;
 }
 .sparkle{animation:sparkle .6s infinite alternate}
-@keyframes sparkle{
-  to{transform:scale(1.25); text-shadow:0 0 18px #ff66cc;}
-}
+@keyframes sparkle{to{transform:scale(1.2);text-shadow:0 0 16px #ff66cc;}}
 
 .secondary-text{
   position:absolute;
-  top:5%;
+  top:4%;
   width:100%;
   text-align:center;
   opacity:.9;
@@ -166,8 +136,8 @@ svg{
 
 .primary-zone{
   position:relative;
-  height:320px;
-  margin-top:30px;
+  height:250px;
+  margin-top:24px;
 }
 
 .gift{
@@ -175,62 +145,56 @@ svg{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:95px;
-  height:95px;
+  width:80px;
+  height:80px;
   background:#ff4fa3;
-  border-radius:14px;
+  border-radius:12px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:3rem;
-  box-shadow:0 0 24px rgba(255,80,160,.85);
+  font-size:2.4rem;
+  box-shadow:0 0 20px rgba(255,80,160,.8);
   z-index:2;
   cursor:pointer;
-  transition:.35s;
 }
 
 .card-item{
   position:absolute;
-  width:320px;
-  height:180px;
-  border-radius:24px;
+  width:250px;
+  height:140px;
+  border-radius:18px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  font-size:1.5rem;
+  font-size:1.25rem;
   font-weight:700;
   cursor:grab;
   user-select:none;
   z-index:5;
   border:3px solid white;
-  background: linear-gradient(135deg, #ff003c, #ff5fa2);
+  background:linear-gradient(135deg,#ff003c,#ff5fa2);
   touch-action: none;
 }
 .card-item span{
-  font-size:3.2rem;
-  margin-bottom:8px
+  font-size:2.4rem;
+  margin-bottom:6px
 }
 
-.bad{background: linear-gradient(135deg,#1e2a4f,#7aa2ff); color:#fff}
-.work{background: linear-gradient(135deg,#3b3b3b,#e0e0e0); color:#fff}
-.stress{background: linear-gradient(135deg,#3c1e4f,#e08cff); color:#fff}
-.distance{background: linear-gradient(135deg,#0f3d3a,#6fffe9); color:#fff}
+.bad{background:linear-gradient(135deg,#1e2a4f,#7aa2ff);color:#fff}
+.work{background:linear-gradient(135deg,#3b3b3b,#e0e0e0);color:#fff}
+.stress{background:linear-gradient(135deg,#3c1e4f,#e08cff);color:#fff}
+.distance{background:linear-gradient(135deg,#0f3d3a,#6fffe9);color:#fff}
 
 .particle{
   position:absolute;
-  width:7px;
-  height:7px;
+  width:6px;
+  height:6px;
   background:gold;
   border-radius:50%;
-  animation:burst .85s linear forwards;
+  animation:burst .8s linear forwards;
 }
-@keyframes burst{
-  to{
-    transform:translate(var(--x),var(--y));
-    opacity:0
-  }
-}
+@keyframes burst{to{transform:translate(var(--x),var(--y));opacity:0}}
 
 .ticket{
   position:fixed;
@@ -239,223 +203,155 @@ svg{
   justify-content:center;
   align-items:center;
   z-index:20;
-  padding: 12px;
+  padding:10px;
 }
-
 .ticket-inner{
-  width:94%;
-  max-width:720px;
+  width:96%;
+  max-width:680px;
   background:linear-gradient(135deg,#ffd700,#fff1a8);
   color:#4a3300;
-  padding:65px 45px;
-  border-radius:28px;
-  position:relative;
-  box-shadow:0 0 60px gold;
+  padding:50px 35px;
+  border-radius:24px;
+  box-shadow:0 0 50px gold;
   text-align:center;
   transform:rotate(-3deg);
-  transition:.45s;
 }
-.ticket-inner:hover{
-  transform:rotate(0deg) scale(1.03);
-  box-shadow:0 0 85px gold;
-}
-
 .ticket-inner h1{
-  font-size:3.6rem;
+  font-size:2.8rem;
   color:gold;
-  -webkit-text-stroke:1.2px #000;
-  text-shadow:0 0 16px rgba(255,215,0,.9);
+  -webkit-text-stroke:1px #000;
+  text-shadow:0 0 12px rgba(255,215,0,.85);
 }
-
-.ticket-inner p{
-  font-size:1.5rem;
-  margin-top:14px;
-}
+.ticket-inner p{font-size:1.3rem;margin-top:10px}
 .fade{opacity:.65}
 
 .popup-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.88);
+  background:rgba(0,0,0,.9);
   display:none;
   justify-content:center;
   align-items:center;
   z-index:50;
-  padding: 12px;
+  padding:12px;
 }
 .popup{
   width:94%;
-  max-width:760px;
-  min-height:560px;
+  max-width:700px;
+  min-height:460px;
   background:linear-gradient(135deg,#ff0000,#000);
   color:white;
-  padding:50px 40px;
-  border-radius:22px;
+  padding:40px 30px;
+  border-radius:16px;
   text-align:center;
-  font-size:1.9rem;
-  box-shadow:0 0 55px #ff0000, inset 0 0 18px #fff;
+  font-size:1.6rem;
+  box-shadow:0 0 45px #ff0000,inset 0 0 16px #fff;
   opacity:0;
-  transform:scale(0.75);
-  transition:all .75s ease;
+  transform:scale(0.8);
+  transition:all .7s ease;
 }
 .popup.show{
   opacity:1;
   transform:scale(1);
 }
-.popup button{
-  margin-top:22px;
-  background:linear-gradient(45deg,#ff003c,#ff5fa2);
+
+#finalWishPage .card{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+  padding:20px 16px;
+}
+
+#finalHeart{
+  font-size:3.8rem;
+  margin-bottom:14px;
+  animation:sparkle 1.2s infinite alternate;
+}
+
+.page-flip-container{
+  position:relative;
+  width:100%;
+  max-width:580px;
+  height:360px;
+  margin-top:18px;
+  perspective:1000px;
+}
+.page-flip{
+  width:100%;
+  height:100%;
+  position:absolute;
+  transform-style:preserve-3d;
+  transition:transform 1s cubic-bezier(0.68,-0.55,0.27,1.55);
+}
+.page-front,.page-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  box-sizing:border-box;
+  text-align:center;
+}
+.page-front{background:linear-gradient(135deg,#ff003c,#ff5fa2);color:white}
+.page-back{
+  background:linear-gradient(135deg,#ffd700,#ffaa00);
+  color:#4a3300;
+  transform:rotateY(180deg);
+  font-family:'Patrick Hand',cursive;
+  box-shadow:0 0 28px gold;
+}
+
+#tapTab{
+  background:linear-gradient(135deg,#ff6b9d,#ff003c);
+  color:white;
+  font-family:'Patrick Hand',cursive;
+  font-size:1.7rem;
+  padding:15px 40px;
+  border-radius:50px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(255,0,60,0.7);
+  transition:.3s;
+  user-select:none;
+  border:2.5px solid white;
+  max-width:95%;
+  word-break:break-word;
+}
+#tapTab:active{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(255,0,60,0.85);
+}
+
+.wish-content{
+  width:100%;
+  max-height:270px;
+  overflow-y:auto;
+  padding:16px;
   font-size:1.6rem;
-  padding:18px 45px;
-  border-radius:38px;
+  line-height:1.5;
+  text-align:center;
+  scrollbar-width:thin;
+  scrollbar-color:#444 #222;
 }
+.wish-content::-webkit-scrollbar{width:5px}
+.wish-content::-webkit-scrollbar-track{background:#222;border-radius:3px}
+.wish-content::-webkit-scrollbar-thumb{background:#444;border-radius:3px}
 
-#finalWishPage .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 25px 18px;
-}
-
-#finalHeart {
-  font-size: 4.6rem;
-  margin-bottom: 18px;
-  animation: sparkle 1.1s ease-in-out infinite alternate;
-}
-
-.page-flip-container {
-  position: relative;
-  width: 100%;
-  max-width: 640px;
-  height: 440px;
-  margin-top: 22px;
-  perspective: 1100px;
-}
-
-.page-flip {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: transform 1.1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-.page-front, .page-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 25px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.page-front {
-  background: linear-gradient(135deg, #ff003c, #ff5fa2);
-  color: white;
-}
-
-#tapTab {
-  background: linear-gradient(135deg, #ff6b9d, #ff003c);
-  color: white;
-  font-family: 'Patrick Hand', cursive;
-  font-size: 1.95rem;
-  padding: 18px 50px;
-  border-radius: 52px;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,0,60,0.75);
-  transition: transform 0.35s ease, box-shadow 0.3s ease;
-  user-select: none;
-  border: 2.8px solid white;
-  max-width: 94%;
-  word-break: break-word;
-}
-#tapTab:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 9px 26px rgba(255,0,60,0.9);
-}
-
-.page-back {
-  background: linear-gradient(135deg, #ffd700, #ffaa00);
-  color: #4a3300;
-  transform: rotateY(180deg);
-  font-family: 'Patrick Hand', cursive;
-  box-shadow: 0 0 32px gold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 22px;
-}
-
-.wish-content {
-  width: 100%;
-  max-height: 340px;
-  overflow-y: auto;
-  padding: 18px;
-  font-size: 1.9rem;
-  line-height: 1.55;
-  text-align: center;
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 #ffeb99;
-}
-.wish-content::-webkit-scrollbar {
-  width: 7px;
-}
-.wish-content::-webkit-scrollbar-track {
-  background: #ffeb99;
-  border-radius: 3px;
-}
-.wish-content::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 3px;
-}
-.wish-content::-webkit-scrollbar-thumb:hover {
-  background: #b8860b;
-}
-
-.page-flipped .page-flip {
-  transform: rotateY(180deg);
-}
-
-/* ✅ MOBILE-FIRST ADJUSTMENTS */
-@media (max-width: 540px) {
-  html { font-size: 14px; }
-  h1 { font-size: 2.3rem; }
-  h2 { font-size: 2.0rem; }
-  .hold-wrap { width: 160px; height: 160px; }
-  .heart { font-size: 3.8rem; }
-  .gift { width: 85px; height: 85px; font-size: 2.7rem; }
-  .card-item { width: 290px; height: 165px; font-size: 1.4rem; }
-  .card-item span { font-size: 2.9rem; }
-  .primary-zone { height: 300px; }
-  .ticket-inner { padding: 55px 35px; }
-  .ticket-inner h1 { font-size: 3.2rem; }
-  .popup { font-size: 1.75rem; min-height: 520px; }
-  #finalHeart { font-size: 4.1rem; }
-  .page-flip-container { height: 420px; }
-  .wish-content { font-size: 1.75rem; max-height: 320px; }
-}
-
-@media (max-width: 414px) {
-  html { font-size: 13px; }
-  .hold-wrap { width: 150px; height: 150px; }
-  .heart { font-size: 3.5rem; }
-  h1 { font-size: 2.1rem; }
-  .card { padding: 28px 20px; }
+.page-flipped .page-flip{
+  transform:rotateY(180deg);
 }
 </style>
 </head>
 <body>
 <div class="bg"></div>
 
-<!-- ✅ MP3 AUDIO (must be in same folder) -->
+<!-- ✅ RELIABLE AUDIO -->
 <audio id="myAudio" src="heal.mp3" preload="auto" loop playsinline></audio>
 
 <!-- PAGE 0 -->
@@ -463,15 +359,13 @@ svg{
   <div class="card">
     <h1>A little something for you before 2026 💖</h1>
     <p>Welcome to the edge of a magical new year... with love ❤️</p>
-
     <div class="hold-wrap">
       <svg viewBox="0 0 200 200">
-        <circle class="track" cx="100" cy="100" r="85"/>
-        <circle class="progress" cx="100" cy="100" r="85" id="circle"/>
+        <circle class="track" cx="100" cy="100" r="70"/>
+        <circle class="progress" cx="100" cy="100" r="70" id="circle"/>
       </svg>
       <div class="heart" id="playButton">💔</div>
     </div>
-
     <p>Hold to heal the heart 💖</p>
     <button id="nextBtn" style="display:none" onclick="next()">Next 💖</button>
   </div>
@@ -486,15 +380,15 @@ svg{
   <div class="card">
     <div class="primary-zone">
       <div class="gift" id="gift">🎁</div>
-      <div class="card-item bad" style="top:15px;left:15px"><span>🌧️</span>Bad Days</div>
-      <div class="card-item work" style="top:35px;left:240px"><span>💼</span>Work Loads</div>
-      <div class="card-item stress" style="top:150px;left:60px"><span>🧠</span>Stress</div>
-      <div class="card-item distance" style="top:160px;left:300px"><span>🌍</span>Distance</div>
+      <div class="card-item bad" style="top:10px;left:10px"><span>🌧️</span>Bad Days</div>
+      <div class="card-item work" style="top:30px;left:220px"><span>💼</span>Work Loads</div>
+      <div class="card-item stress" style="top:130px;left:50px"><span>🧠</span>Stress</div>
+      <div class="card-item distance" style="top:140px;left:280px"><span>🌍</span>Distance</div>
     </div>
   </div>
 </div>
 
-<!-- GOLDEN TICKET -->
+<!-- TICKET -->
 <div class="ticket" id="ticket">
   <div class="ticket-inner">
     <h1>GOLDEN TICKET</h1>
@@ -505,7 +399,7 @@ svg{
   </div>
 </div>
 
-<!-- PAGE 2: MEMORIES -->
+<!-- PAGE 2 -->
 <div class="page" id="memoriesPage">
   <div class="card">
     <h1>Memories 💖</h1>
@@ -513,7 +407,7 @@ svg{
   </div>
 </div>
 
-<!-- PAGE 3: FINAL WISH -->
+<!-- PAGE 3 -->
 <div class="page" id="finalWishPage">
   <div class="card">
     <div id="finalHeart">💖</div>
@@ -540,12 +434,11 @@ svg{
 </div>
 
 <div class="popup-overlay" id="popupOverlay">
-  <div class="popup" id="popupMessage">
-  </div>
+  <div class="popup" id="popupMessage"></div>
 </div>
 
 <script>
-// ==== MOBILE-SAFE AUDIO PLAY ====
+// ==== AUDIO ====
 const audio = document.getElementById('myAudio');
 const playButton = document.getElementById('playButton');
 let musicStarted = false;
@@ -554,44 +447,43 @@ function startMusic() {
   if (!musicStarted) {
     musicStarted = true;
     audio.volume = 0.4;
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(e => console.warn("Audio play failed:", e));
-    }
+    audio.play().catch(e => console.warn("Audio failed:", e));
     playButton.innerHTML = '💖';
     playButton.classList.add('sparkle');
   }
 }
 
-// ✅ Unified touch + click handler
-playButton.addEventListener('click', startMusic);
-playButton.addEventListener('touchstart', function(e) {
+// Unified tap handler for mobile
+function handleTap(e) {
   e.preventDefault();
   startMusic();
-}, { passive: false });
+}
+playButton.addEventListener('click', handleTap);
+playButton.addEventListener('touchstart', handleTap, { passive: false });
 
-// ==== HEALING ANIMATION ON HOLD ====
+// ==== HEALING ANIMATION ====
 const pages = document.querySelectorAll('.page');
 let index = 0;
-const circle = document.getElementById("circle");
-const nextBtn = document.getElementById("nextBtn");
+const circle = document.getElementById('circle');
+const nextBtn = document.getElementById('nextBtn');
 let hold = 0, timer = null, done = false;
 
 const startHold = () => {
   if (done) return;
   timer = setInterval(() => {
     hold++;
-    circle.style.strokeDashoffset = 534 - (534 * hold / 100);
+    circle.style.strokeDashoffset = 440 - (440 * hold / 100);
     if (hold >= 100) {
       done = true;
       clearInterval(timer);
-      nextBtn.style.display = "inline-block";
+      nextBtn.style.display = 'inline-block';
     }
   }, 25);
 };
+
 const stopHold = () => { if (timer) clearInterval(timer); };
 
-// Hold logic
+// Hold detection
 let isHolding = false;
 const HOLD_THRESHOLD = 400;
 
@@ -611,85 +503,115 @@ playButton.addEventListener('touchstart', function(e) {
   document.addEventListener(ev, () => { if (isHolding) stopHold(); isHolding = false; });
 });
 
-playButton.addEventListener('mousedown', () => {
-  startMusic();
-  isHolding = false;
-  setTimeout(() => { if (!done) { isHolding = true; startHold(); } }, HOLD_THRESHOLD);
-});
-document.addEventListener('mouseup', () => { if (isHolding) stopHold(); isHolding = false; });
+// ==== DRAG CARDS — MOBILE OPTIMIZED ====
+document.querySelectorAll('.card-item').forEach(card => {
+  let isDragging = false;
+  let startX, startY, initialX, initialY;
 
-// ==== Navigation ====
+  const startDrag = (clientX, clientY) => {
+    isDragging = true;
+    card.style.zIndex = 10;
+    card.style.cursor = 'grabbing';
+    initialX = parseFloat(card.style.left) || card.offsetLeft;
+    initialY = parseFloat(card.style.top) || card.offsetTop;
+    startX = clientX;
+    startY = clientY;
+    card.style.transition = 'none';
+  };
+
+  const doDrag = (clientX, clientY) => {
+    if (!isDragging) return;
+    card.style.left = (initialX + (clientX - startX)) + 'px';
+    card.style.top = (initialY + (clientY - startY)) + 'px';
+  };
+
+  const stopDrag = () => {
+    if (isDragging) {
+      isDragging = false;
+      card.style.cursor = 'grab';
+      card.style.transition = '';
+    }
+  };
+
+  // Touch support
+  card.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    startDrag(touch.clientX, touch.clientY);
+  }, { passive: false });
+
+  document.addEventListener('touchmove', e => {
+    if (e.touches.length > 0 && isDragging) {
+      const touch = e.touches[0];
+      doDrag(touch.clientX, touch.clientY);
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchend', stopDrag);
+  document.addEventListener('touchcancel', stopDrag);
+
+  // Mouse fallback
+  card.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', stopDrag);
+});
+
+// ==== OTHER INTERACTIONS ====
 function next() {
-  pages[index].classList.remove("active");
+  pages[index].classList.remove('active');
   index = Math.min(index + 1, pages.length - 1);
-  pages[index].classList.add("active");
+  pages[index].classList.add('active');
 }
 
-// ===== DRAG, GIFT, MEMORIES, FLIP — PRESERVED =====
-document.querySelectorAll('.card-item').forEach(card => {
-  card.onmousedown = e => {
-    let x = e.clientX - card.offsetLeft, y = e.clientY - card.offsetTop;
-    card.style.zIndex = 10; card.style.cursor = 'grabbing';
-    const move = e => { card.style.left = (e.pageX - x) + 'px'; card.style.top = (e.pageY - y) + 'px'; };
-    document.addEventListener('mousemove', move);
-    document.onmouseup = () => { document.removeEventListener('mousemove', move); card.style.cursor = 'grab'; };
-  };
+gift.addEventListener('click', () => {
+  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+  document.body.classList.add('gold');
+  for (let i = 0; i < 50; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = '50%';
+    p.style.top = '50%';
+    p.style.setProperty('--x', `${Math.random() * 300 - 150}px`);
+    p.style.setProperty('--y', `${Math.random() * 300 - 150}px`);
+    gift.appendChild(p);
+    setTimeout(() => p.remove(), 800);
+  }
+  setTimeout(() => ticket.style.display = 'flex', 500);
 });
 
-const gift = document.getElementById("gift");
-const ticket = document.getElementById("ticket");
-gift.onclick = () => {
-  navigator.vibrate && navigator.vibrate([100, 50, 100]);
-  document.body.classList.add("gold");
-  for (let i = 0; i < 50; i++) {
-    const p = document.createElement("div");
-    p.className = "particle";
-    p.style.left = "50%";
-    p.style.top = "50%";
-    p.style.setProperty('--x', `${Math.random() * 350 - 175}px`);
-    p.style.setProperty('--y', `${Math.random() * 350 - 175}px`);
-    gift.appendChild(p);
-    setTimeout(() => p.remove(), 850);
-  }
-  setTimeout(() => ticket.style.display = "flex", 500);
-};
-
-const revealBtn = document.getElementById("revealMemoriesBtn");
-const popupOverlay = document.getElementById("popupOverlay");
-const popupMessage = document.getElementById("popupMessage");
-revealBtn.onclick = () => {
-  revealBtn.style.display = "none";
-  popupOverlay.style.display = "flex";
+revealMemoriesBtn.addEventListener('click', () => {
+  revealMemoriesBtn.style.display = 'none';
+  popupOverlay.style.display = 'flex';
   popupMessage.innerHTML = '<span class="signature-font">Athan nee enkuda photo veh eduthukaliyehh 😤 aproom enna memoriesuhh</span>';
-  popupMessage.classList.add("show");
+  popupMessage.classList.add('show');
   setTimeout(() => {
     popupMessage.innerHTML += '<br><br><button id="secondPopupBtn" class="signature-font">Something Special Than Photos 💖</button>';
-    document.getElementById("secondPopupBtn").onclick = () => {
+    secondPopupBtn.onclick = () => {
       popupMessage.innerHTML = '<span class="signature-font">Ana na unna en heart fullah neraphi vachiruken 💖Un siripuh 😁<br>Un kannuh👀<br>Kathi mari rendu puruvohm ⚔<br> Sirikurpah alga theriyura palluh <br>Aproom unnoda aiyahhhh 😫<br> Ithelam nenachelhhh ulukulah enna moh pannuthu . Nee alagu thandi 💖 Alagiiiiiii....</span>';
       popupMessage.style.background = "linear-gradient(135deg,#ff0000,#000)";
       popupMessage.style.boxShadow = "0 0 60px #ff0000, inset 0 0 20px #fff";
       setTimeout(() => {
-        const wishBtn = document.createElement('button');
-        wishBtn.className = 'signature-font';
-        wishBtn.innerText = 'The Wish';
-        wishBtn.style.fontSize = '2.1rem';
-        wishBtn.style.marginTop = '28px';
-        wishBtn.style.padding = '16px 38px';
-        wishBtn.onclick = () => {
+        const btn = document.createElement('button');
+        btn.className = 'signature-font';
+        btn.innerText = 'The Wish';
+        btn.style.fontSize = '2.1rem';
+        btn.style.marginTop = '28px';
+        btn.style.padding = '16px 38px';
+        btn.onclick = () => {
           popupOverlay.style.display = 'none';
           pages[pages.length - 1].classList.add('active');
         };
-        popupMessage.appendChild(wishBtn);
+        popupMessage.appendChild(btn);
       }, 5000);
     };
   }, 2000);
-};
+});
 
-document.getElementById('tapTab').onclick = () => {
+tapTab.addEventListener('click', () => {
   document.querySelector('.page-flip-container').classList.add('page-flipped');
   tapTab.style.pointerEvents = 'none';
   tapTab.style.opacity = '0.7';
-};
+});
 </script>
 </body>
 </html>
