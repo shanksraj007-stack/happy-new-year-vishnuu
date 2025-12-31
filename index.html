@@ -3,16 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <title>Happy New Year Vishnu 💖</title>
-<!-- ✅ Perfect mobile viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="mobile-web-app-capable" content="yes" />
 <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Montserrat:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:14px}
 @media (min-width:480px){html{font-size:15px}}
-@media (min-width:768px){html{font-size:16px}}
 
 body{
   background:#000;
@@ -20,7 +17,6 @@ body{
   overflow:hidden;
   font-family:'Montserrat',sans-serif;
   font-size:1rem;
-  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -86,7 +82,6 @@ button{
   transition:.3s;
   font-weight:600;
 }
-button:hover{transform:scale(1.05);box-shadow:0 0 12px #ff0000}
 
 .hold-wrap{
   margin:20px auto;
@@ -120,7 +115,6 @@ svg{
   font-size:3.2rem;
   cursor:pointer;
   user-select:none;
-  -webkit-user-drag:none;
 }
 .sparkle{animation:sparkle .6s infinite alternate}
 @keyframes sparkle{to{transform:scale(1.2);text-shadow:0 0 16px #ff66cc;}}
@@ -174,6 +168,7 @@ svg{
   z-index:5;
   border:3px solid white;
   background:linear-gradient(135deg,#ff003c,#ff5fa2);
+  /* ✅ Allow dragging on mobile */
   touch-action: none;
 }
 .card-item span{
@@ -323,10 +318,6 @@ svg{
   max-width:95%;
   word-break:break-word;
 }
-#tapTab:active{
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(255,0,60,0.85);
-}
 
 .wish-content{
   width:100%;
@@ -351,7 +342,7 @@ svg{
 <body>
 <div class="bg"></div>
 
-<!-- ✅ RELIABLE AUDIO -->
+<!-- ✅ ONLY AUDIO: MP3 FILE -->
 <audio id="myAudio" src="heal.mp3" preload="auto" loop playsinline></audio>
 
 <!-- PAGE 0 -->
@@ -366,7 +357,7 @@ svg{
       </svg>
       <div class="heart" id="playButton">💔</div>
     </div>
-    <p>Hold to heal the heart 💖</p>
+    <p>Tap to start music • Hold to heal 💖</p>
     <button id="nextBtn" style="display:none" onclick="next()">Next 💖</button>
   </div>
 </div>
@@ -380,6 +371,7 @@ svg{
   <div class="card">
     <div class="primary-zone">
       <div class="gift" id="gift">🎁</div>
+      <!-- ✅ Cards with exact positions -->
       <div class="card-item bad" style="top:10px;left:10px"><span>🌧️</span>Bad Days</div>
       <div class="card-item work" style="top:30px;left:220px"><span>💼</span>Work Loads</div>
       <div class="card-item stress" style="top:130px;left:50px"><span>🧠</span>Stress</div>
@@ -438,7 +430,7 @@ svg{
 </div>
 
 <script>
-// ==== AUDIO ====
+// ==== MUSIC: PLAY ON HEART TAP ====
 const audio = document.getElementById('myAudio');
 const playButton = document.getElementById('playButton');
 let musicStarted = false;
@@ -447,23 +439,20 @@ function startMusic() {
   if (!musicStarted) {
     musicStarted = true;
     audio.volume = 0.4;
-    audio.play().catch(e => console.warn("Audio failed:", e));
+    audio.play().catch(e => console.warn("Audio play failed:", e));
     playButton.innerHTML = '💖';
     playButton.classList.add('sparkle');
   }
 }
 
-// Unified tap handler for mobile
-function handleTap(e) {
+// ✅ Works on mobile tap
+playButton.addEventListener('click', startMusic);
+playButton.addEventListener('touchstart', function(e) {
   e.preventDefault();
   startMusic();
-}
-playButton.addEventListener('click', handleTap);
-playButton.addEventListener('touchstart', handleTap, { passive: false });
+}, { passive: false });
 
-// ==== HEALING ANIMATION ====
-const pages = document.querySelectorAll('.page');
-let index = 0;
+// ==== HEALING ON HOLD (optional) ====
 const circle = document.getElementById('circle');
 const nextBtn = document.getElementById('nextBtn');
 let hold = 0, timer = null, done = false;
@@ -481,9 +470,6 @@ const startHold = () => {
   }, 25);
 };
 
-const stopHold = () => { if (timer) clearInterval(timer); };
-
-// Hold detection
 let isHolding = false;
 const HOLD_THRESHOLD = 400;
 
@@ -500,10 +486,10 @@ playButton.addEventListener('touchstart', function(e) {
 }, { passive: false });
 
 ['touchend', 'touchcancel'].forEach(ev => {
-  document.addEventListener(ev, () => { if (isHolding) stopHold(); isHolding = false; });
+  document.addEventListener(ev, () => { if (isHolding) clearInterval(timer); isHolding = false; });
 });
 
-// ==== DRAG CARDS — MOBILE OPTIMIZED ====
+// ==== ✅ DRAG CARDS — FULL TOUCH SUPPORT ====
 document.querySelectorAll('.card-item').forEach(card => {
   let isDragging = false;
   let startX, startY, initialX, initialY;
@@ -519,10 +505,10 @@ document.querySelectorAll('.card-item').forEach(card => {
     card.style.transition = 'none';
   };
 
-  const doDrag = (clientX, clientY) => {
+  const moveDrag = (clientX, clientY) => {
     if (!isDragging) return;
-    card.style.left = (initialX + (clientX - startX)) + 'px';
-    card.style.top = (initialY + (clientY - startY)) + 'px';
+    card.style.left = (initialX + clientX - startX) + 'px';
+    card.style.top = (initialY + clientY - startY) + 'px';
   };
 
   const stopDrag = () => {
@@ -533,36 +519,40 @@ document.querySelectorAll('.card-item').forEach(card => {
     }
   };
 
-  // Touch support
-  card.addEventListener('touchstart', e => {
+  // ✅ TOUCH EVENTS FOR MOBILE
+  card.addEventListener('touchstart', (e) => {
     e.preventDefault();
     const touch = e.touches[0];
     startDrag(touch.clientX, touch.clientY);
   }, { passive: false });
 
-  document.addEventListener('touchmove', e => {
-    if (e.touches.length > 0 && isDragging) {
+  document.addEventListener('touchmove', (e) => {
+    if (isDragging && e.touches.length > 0) {
       const touch = e.touches[0];
-      doDrag(touch.clientX, touch.clientY);
+      moveDrag(touch.clientX, touch.clientY);
     }
   }, { passive: false });
 
   document.addEventListener('touchend', stopDrag);
   document.addEventListener('touchcancel', stopDrag);
 
-  // Mouse fallback
-  card.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
-  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  // Mouse fallback (for testing)
+  card.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+  document.addEventListener('mousemove', (e) => moveDrag(e.clientX, e.clientY));
   document.addEventListener('mouseup', stopDrag);
 });
 
-// ==== OTHER INTERACTIONS ====
+// ==== Navigation & Other Interactions ====
+const pages = document.querySelectorAll('.page');
+let index = 0;
+
 function next() {
   pages[index].classList.remove('active');
   index = Math.min(index + 1, pages.length - 1);
   pages[index].classList.add('active');
 }
 
+// Gift
 gift.addEventListener('click', () => {
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   document.body.classList.add('gold');
@@ -579,6 +569,7 @@ gift.addEventListener('click', () => {
   setTimeout(() => ticket.style.display = 'flex', 500);
 });
 
+// Memories
 revealMemoriesBtn.addEventListener('click', () => {
   revealMemoriesBtn.style.display = 'none';
   popupOverlay.style.display = 'flex';
@@ -607,6 +598,7 @@ revealMemoriesBtn.addEventListener('click', () => {
   }, 2000);
 });
 
+// Flip
 tapTab.addEventListener('click', () => {
   document.querySelector('.page-flip-container').classList.add('page-flipped');
   tapTab.style.pointerEvents = 'none';
