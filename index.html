@@ -18,6 +18,7 @@ body{
   font-family:'Montserrat',sans-serif;
   font-size:1rem;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 h1,h2,h3,h4{
@@ -115,6 +116,7 @@ svg{
   font-size:3.2rem;
   cursor:pointer;
   user-select:none;
+  -webkit-tap-highlight-color: rgba(255,255,255,0.3);
 }
 .sparkle{animation:sparkle .6s infinite alternate}
 @keyframes sparkle{to{transform:scale(1.2);text-shadow:0 0 16px #ff66cc;}}
@@ -341,8 +343,11 @@ svg{
 <body>
 <div class="bg"></div>
 
-<!-- ✅ MP3 AUDIO WITH GITHUB REPOSITORY PATH -->
-<audio id="myAudio" src="heal.mp3" preload="auto" loop playsinline></audio>
+<!-- ✅ MP3 AUDIO - FIXED FOR ANDROID -->
+<audio id="myAudio" preload="auto" loop playsinline>
+  <source src="heal.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 <!-- PAGE 0 -->
 <div class="page active">
@@ -426,27 +431,117 @@ svg{
 </div>
 
 <script>
-// ==== PLAY MUSIC ON HEART TAP ====
+// ==== FIXED AUDIO PLAYBACK FOR ANDROID ====
 const audio = document.getElementById('myAudio');
 const playButton = document.getElementById('playButton');
 let musicStarted = false;
+let audioContextInitialized = false;
 
-function startMusic() {
-  if (!musicStarted) {
-    musicStarted = true;
-    audio.volume = 0.4;
-    audio.play().catch(e => console.warn("Audio play failed:", e));
-    playButton.innerHTML = '💖';
-    playButton.classList.add('sparkle');
+// Pre-initialize audio on first touch (Android fix)
+function initializeAudio() {
+  if (!audioContextInitialized) {
+    // Create a silent audio buffer and play it to unlock audio
+    try {
+      const silentBuffer = audioContext.createBuffer(1, 1, 22050);
+      const source = audioContext.createBufferSource();
+      source.buffer = silentBuffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+      audioContextInitialized = true;
+      console.log("Audio context initialized");
+    } catch (e) {
+      console.warn("Audio context init failed:", e);
+    }
   }
 }
 
-// ✅ Tap = Play Music
-playButton.addEventListener('click', startMusic);
-playButton.addEventListener('touchstart', e => {
+// Force play audio with multiple fallbacks
+function startMusic() {
+  if (!musicStarted) {
+    musicStarted = true;
+    
+    // Set volume
+    audio.volume = 0.4;
+    
+    // Multiple attempts to play
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log("Audio playing successfully");
+          playButton.innerHTML = '💖';
+          playButton.classList.add('sparkle');
+        })
+        .catch(error => {
+          console.warn("First play attempt failed:", error);
+          
+          // Fallback 1: Try again after a short delay
+          setTimeout(() => {
+            audio.play()
+              .then(() => {
+                playButton.innerHTML = '💖';
+                playButton.classList.add('sparkle');
+              })
+              .catch(e => {
+                console.warn("Second play attempt failed:", e);
+                
+                // Fallback 2: Load and play
+                audio.load();
+                setTimeout(() => {
+                  audio.play()
+                    .then(() => {
+                      playButton.innerHTML = '💖';
+                      playButton.classList.add('sparkle');
+                    })
+                    .catch(e2 => {
+                      console.error("All play attempts failed:", e2);
+                      // Show visual feedback even if audio fails
+                      playButton.innerHTML = '💖';
+                      playButton.classList.add('sparkle');
+                    });
+                }, 100);
+              });
+          }, 300);
+        });
+    } else {
+      // Direct play for older browsers
+      audio.play();
+      playButton.innerHTML = '💖';
+      playButton.classList.add('sparkle');
+    }
+  }
+}
+
+// Enhanced touch event handling
+playButton.addEventListener('touchstart', function(e) {
   e.preventDefault();
+  e.stopPropagation();
+  
+  // Initialize on first touch
+  if (!audioContextInitialized) {
+    initializeAudio();
+  }
+  
+  // Start music immediately
   startMusic();
+  
+  // Start healing after threshold
+  isHolding = false;
+  setTimeout(() => {
+    if (!healed) {
+      isHolding = true;
+      startHealing();
+    }
+  }, HOLD_THRESHOLD);
 }, { passive: false });
+
+// Click event for desktop
+playButton.addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  startMusic();
+});
 
 // ==== HEALING ON HOLD ====
 const circle = document.getElementById('circle');
@@ -476,26 +571,15 @@ function stopHealing() {
 let isHolding = false;
 const HOLD_THRESHOLD = 400;
 
-playButton.addEventListener('touchstart', e => {
-  e.preventDefault();
-  startMusic(); // Always play on touch
-  isHolding = false;
-  setTimeout(() => {
-    if (!healed) {
-      isHolding = true;
-      startHealing();
-    }
-  }, HOLD_THRESHOLD);
-}, { passive: false });
-
-['touchend', 'touchcancel'].forEach(ev => {
-  document.addEventListener(ev, () => {
+// Touch end events
+['touchend', 'touchcancel', 'touchleave'].forEach(ev => {
+  document.addEventListener(ev, function(e) {
     if (isHolding) stopHealing();
     isHolding = false;
-  });
+  }, { passive: true });
 });
 
-// Mouse fallback
+// Mouse events for desktop
 playButton.addEventListener('mousedown', () => {
   startMusic();
   isHolding = false;
@@ -506,6 +590,7 @@ playButton.addEventListener('mousedown', () => {
     }
   }, HOLD_THRESHOLD);
 });
+
 document.addEventListener('mouseup', () => {
   if (isHolding) stopHealing();
   isHolding = false;
