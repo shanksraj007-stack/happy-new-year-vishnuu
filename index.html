@@ -341,7 +341,7 @@ svg{
 <body>
 <div class="bg"></div>
 
-<!-- ✅ MP3 AUDIO PLAYER -->
+<!-- ✅ MP3 AUDIO -->
 <audio id="myAudio" src="heal.mp3" preload="auto" loop playsinline></audio>
 
 <!-- PAGE 0 -->
@@ -356,12 +356,13 @@ svg{
       </svg>
       <div class="heart" id="playButton">💔</div>
     </div>
-    <p>Tap to play music • Hold to heal the heart 💖</p>
+    <!-- ✅ REMOVED "Tap to play music" -->
+    <p>Hold to heal the heart 💖</p>
     <button id="nextBtn" style="display:none" onclick="next()">Next 💖</button>
   </div>
 </div>
 
-<!-- PAGE 1 -->
+<!-- Rest of your pages (unchanged) -->
 <div class="page">
   <div class="secondary-text">
     <h1>Something’s waiting for you 💖</h1>
@@ -378,7 +379,6 @@ svg{
   </div>
 </div>
 
-<!-- TICKET -->
 <div class="ticket" id="ticket">
   <div class="ticket-inner">
     <h1>GOLDEN TICKET</h1>
@@ -389,7 +389,6 @@ svg{
   </div>
 </div>
 
-<!-- PAGE 2 -->
 <div class="page" id="memoriesPage">
   <div class="card">
     <h1>Memories 💖</h1>
@@ -397,7 +396,6 @@ svg{
   </div>
 </div>
 
-<!-- PAGE 3 -->
 <div class="page" id="finalWishPage">
   <div class="card">
     <div id="finalHeart">💖</div>
@@ -428,7 +426,7 @@ svg{
 </div>
 
 <script>
-// ==== AUDIO: PLAY ON TAP ====
+// ==== PLAY MUSIC ON HEART TAP ====
 const audio = document.getElementById('myAudio');
 const playButton = document.getElementById('playButton');
 let musicStarted = false;
@@ -443,14 +441,14 @@ function startMusic() {
   }
 }
 
-// ✅ TAP = PLAY MUSIC (immediate)
+// ✅ Tap = Play Music
 playButton.addEventListener('click', startMusic);
-playButton.addEventListener('touchstart', function(e) {
+playButton.addEventListener('touchstart', e => {
   e.preventDefault();
   startMusic();
 }, { passive: false });
 
-// ==== HEALING ANIMATION: ONLY ON HOLD ====
+// ==== HEALING ON HOLD ====
 const circle = document.getElementById('circle');
 const nextBtn = document.getElementById('nextBtn');
 let holdProgress = 0;
@@ -474,11 +472,11 @@ function stopHealing() {
   if (holdInterval) clearInterval(holdInterval);
 }
 
-// Hold detection (400ms threshold)
+// Hold logic (400ms threshold)
 let isHolding = false;
 const HOLD_THRESHOLD = 400;
 
-playButton.addEventListener('touchstart', function(e) {
+playButton.addEventListener('touchstart', e => {
   e.preventDefault();
   startMusic(); // Always play on touch
   isHolding = false;
@@ -513,7 +511,7 @@ document.addEventListener('mouseup', () => {
   isHolding = false;
 });
 
-// ==== DRAG CARDS — MOBILE TOUCH SUPPORT ====
+// ==== DRAG CARDS — FULL TOUCH SUPPORT ====
 document.querySelectorAll('.card-item').forEach(card => {
   let isDragging = false;
   let startX, startY, initialX, initialY;
@@ -543,14 +541,13 @@ document.querySelectorAll('.card-item').forEach(card => {
     }
   };
 
-  // TOUCH
-  card.addEventListener('touchstart', (e) => {
+  card.addEventListener('touchstart', e => {
     e.preventDefault();
     const touch = e.touches[0];
     startDrag(touch.clientX, touch.clientY);
   }, { passive: false });
 
-  document.addEventListener('touchmove', (e) => {
+  document.addEventListener('touchmove', e => {
     if (isDragging && e.touches.length > 0) {
       const touch = e.touches[0];
       moveDrag(touch.clientX, touch.clientY);
@@ -560,13 +557,12 @@ document.querySelectorAll('.card-item').forEach(card => {
   document.addEventListener('touchend', stopDrag);
   document.addEventListener('touchcancel', stopDrag);
 
-  // MOUSE (for testing)
-  card.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
-  document.addEventListener('mousemove', (e) => moveDrag(e.clientX, e.clientY));
+  card.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
+  document.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
   document.addEventListener('mouseup', stopDrag);
 });
 
-// ==== Navigation ====
+// ==== Navigation & Other ====
 const pages = document.querySelectorAll('.page');
 let index = 0;
 
@@ -576,7 +572,6 @@ function next() {
   pages[index].classList.add('active');
 }
 
-// ==== Other interactions (unchanged) ====
 gift.addEventListener('click', () => {
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   document.body.classList.add('gold');
